@@ -68,7 +68,7 @@ namespace edu.ksu.cis.masaaki
         /// <summary>
         /// Removes the transaction from the customer
         /// </summary>
-        public RemoveTransactions() {
+        public void RemoveTransactions() {
             customer.RemoveTransactionFromAllTransactions();
         }
 
