@@ -13,7 +13,7 @@ namespace edu.ksu.cis.masaaki
     public partial class StaffWindow : Form
     {
         // XXX add more fields if necessary
-
+        BookShopController bookShop;
         ListCustomersDialog listCustomersDialog;
         CustomerDialog customerDialog;
         ListBooksDialog listBooksDialog;
@@ -26,6 +26,14 @@ namespace edu.ksu.cis.masaaki
         public StaffWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// overloaded constructor for StaffWindow
+        /// </summary>
+        /// <param name="bookShop"></param>
+        public StaffWindow(BookShopController bookShop) : this() {
+            this.bookShop = bookShop;
         }
 
         // XXX You may add overriding constructors (constructors with different set of arguments).
