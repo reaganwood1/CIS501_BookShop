@@ -112,7 +112,7 @@ namespace edu.ksu.cis.masaaki
                 try
                 {   // to capture an exception from SelectedItem/SelectedIndex of listBooksDialog
                     listBooksDialog.ClearDisplayItems();
-                    listBooksDialog.AddDisplayItems(null); //null is a dummy argument
+                    listBooksDialog.AddDisplayItems(bookShop.GetAllBooks().ToArray()); //null is a dummy argument
                     if (listBooksDialog.Display() == DialogReturn.Done) return;
                     // select is pressed
 
@@ -122,7 +122,8 @@ namespace edu.ksu.cis.masaaki
                         try
                         { // to capture an exception from Price/Stock of bookDialog
                             if (bookDialog.Display() == DialogReturn.Cancel) break;
-                            // XXX
+                            
+                            bookShop.EditBookInformation(bookDialog.BookTitle, bookDialog.Author, bookDialog.Publisher, bookDialog.Price, bookDialog.Stock, bookDialog.ISBN, bookDialog.Date, (Book)listBooksDialog.SelectedItem);
 
                             break;
                         }
