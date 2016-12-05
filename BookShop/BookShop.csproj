@@ -53,6 +53,7 @@
     <Compile Include="BookShop.Designer.cs">
       <DependentUpon>BookShop.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookShopController.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerWindow.cs">
       <SubType>Form</SubType>

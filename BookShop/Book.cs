@@ -50,6 +50,13 @@ namespace edu.ksu.cis.masaaki
         private string isbn;
 
         /// <summary>
+        /// public getter for isbn
+        /// </summary>
+        public string Isbn {
+            get;
+        }
+
+        /// <summary>
         /// publish date of the book
         /// </summary>
         private string publishDate;

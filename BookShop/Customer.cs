@@ -129,6 +129,20 @@ namespace edu.ksu.cis.masaaki
             allTransactions = new List<Transaction>();
         }
 
+        public void EditCustomerInformation(string firstName, string lastName, string userName, string password, string emailAddress, int telephoneNumber, string address)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.userName = userName;
+            this.password = password;
+            this.emailAddress = emailAddress;
+            this.address = address;
+            this.telephoneNumber = telephoneNumber;
+            wishlist = new List<Book>();
+            shoppingCart = new Transaction(this);
+            allTransactions = new List<Transaction>();
+        }
+
         /// <summary>
         /// Adds book to the shopping cart
         /// </summary>
@@ -195,6 +209,30 @@ namespace edu.ksu.cis.masaaki
         public override string ToString()
         {
             return firstName + " " + lastName + " " + userName + " " + emailAddress + " " + address + " " + telephoneNumber;
+        }
+
+        /// <summary>
+        /// Return all the transactions from the user
+        /// </summary>
+        /// <returns></returns>
+        public List<Transaction> GetUserTransactionHistory() {
+            return allTransactions;
+        }
+
+        /// <summary>
+        /// returns the user's shopping cart
+        /// </summary>
+        /// <returns></returns>
+        public Transaction GetUserShoppingCart() {
+            return shoppingCart;
+        }
+
+        /// <summary>
+        /// returns the user's current Wishlist
+        /// </summary>
+        /// <returns></returns>
+        public List<Book> GetWishList() {
+            return wishlist;
         }
     }
 }
