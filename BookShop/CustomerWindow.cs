@@ -137,9 +137,15 @@ namespace edu.ksu.cis.masaaki
                         switch (bookInformationDialog.Display())
                         {
                             case DialogReturn.AddToCart: // Add to Cart
-                                if (!bookShop.AddBookToCart("", book)) { // could not add in this 
+                                if (bookShop.LoggedIn()) // check for logged in user before attemping to add book to cart
+                                {
+                                    if (!bookShop.AddBookToCart("", book))
+                                        MessageBox.Show("No stock of this book");
+                                }
+                                else
+                                { // nobod was logged in
                                     MessageBox.Show("This operation requires login");
-                                }                     
+                                }                 
                                 continue;
 
                             case DialogReturn.AddToWishList: // Add to Wishlist

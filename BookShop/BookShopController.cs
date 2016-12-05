@@ -85,31 +85,27 @@ namespace edu.ksu.cis.masaaki
         }
 
         /// <summary>
-        /// Adds a book to the logged in Customer's cart
+        /// Adds a book to the logged in Customer's cart if the book is in stock
         /// </summary>
         /// <param name="isbn"></param>
         /// <returns></returns>
         public bool AddBookToCart(string isbnOptionalProvided, Book bookOptionalProvided) {
-            if (LoggedIn()) {
-                if (bookOptionalProvided == null)
+            if (bookOptionalProvided == null)
+            {
+                foreach (Book book in allBooks)
                 {
-                    foreach (Book book in allBooks)
+                    if (book.Isbn.Equals(isbnOptionalProvided) && book.Quantity > 0) // book is found, break out of loop and add book to the logged in customer's shopping cart
                     {
-                        if (book.Isbn.Equals(isbnOptionalProvided)) // book is found, break out of loop and add book to the logged in customer's shopping cart
-                        {
-                            loggedIn.AddBookToCart(book);
-                            break;
-                        }
+                        loggedIn.AddBookToCart(book);
+                        break;
                     }
                 }
-                else {
-                    loggedIn.AddBookToCart(bookOptionalProvided);
-                    return true;
-                }
-                
+            } else if (bookOptionalProvided.Quantity > 0) {
+                loggedIn.AddBookToCart(bookOptionalProvided);
+                return true;
             }
-            // no customer was logged in
-            return false;
+
+            return false; // Book is out of stock
         }
 
 
