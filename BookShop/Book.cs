@@ -63,7 +63,7 @@ namespace edu.ksu.cis.masaaki
         public string Isbn {
             get
             {
-                return Isbn;
+                return isbn;
             }
         }
 
