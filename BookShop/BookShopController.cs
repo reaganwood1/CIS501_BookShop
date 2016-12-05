@@ -65,7 +65,7 @@ namespace edu.ksu.cis.masaaki
         }
 
         /// <summary>
-        /// Create book and add it to the allBooks List
+        /// Create book and add it to the allBooks List if the isbn hasn't already been registered
         /// </summary>
         /// <param name="title"></param>
         /// <param name="author"></param>
@@ -74,9 +74,14 @@ namespace edu.ksu.cis.masaaki
         /// <param name="publishDate"></param>
         /// <param name="price"></param>
         /// <param name="quantity"></param>
-        public void AddBook(string title, string author, string publisher, string isbn, string publishDate, double price, int quantity) {
+        public bool AddBook(string title, string author, string publisher, string isbn, string publishDate, decimal price, int quantity) {
+            foreach (Book b in allBooks) {
+                if (b.Isbn.Equals(isbn))
+                    return false;
+            }
             Book book = new Book(title, author, publisher, isbn, publishDate, price, quantity);
             allBooks.Add(book);
+            return true;
         }
 
         /// <summary>
@@ -306,7 +311,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="isbn"></param>
         /// <param name="date"></param>
         /// <param name="book"></param>
-        public void EditBookInformation(string title, string author, string publisher, double price, int quantity, string isbn, string date, Book book) {
+        public void EditBookInformation(string title, string author, string publisher, decimal price, int quantity, string isbn, string date, Book book) {
             book.EditBook(title, author, publisher, isbn, date, price);
         }
 

@@ -71,12 +71,12 @@ namespace edu.ksu.cis.masaaki
         /// <summary>
         /// price of the book
         /// </summary>
-        private double price;
+        private decimal price;
 
         /// <summary>
         /// public getter for the price
         /// </summary>
-        public double Price {
+        public decimal Price {
             get;
         }
 
@@ -101,7 +101,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="isbn">isbn of the book</param>
         /// <param name="publishDate">publish date of the book</param>
         /// <param name="price">price of the book</param>
-        public Book(string title, string author, string publisher, string isbn, string publishDate, double price, int quantity) {
+        public Book(string title, string author, string publisher, string isbn, string publishDate, decimal price, int quantity) {
 
             this.title = title;
             this.author = author;
@@ -121,7 +121,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="isbn">isbn to be edited</param>
         /// <param name="publishDate">publish date to be edited</param>
         /// <param name="price">price to be edited</param>
-        public void EditBook(string title, string author, string publisher, string isbn, string publishDate, double price) {
+        public void EditBook(string title, string author, string publisher, string isbn, string publishDate, decimal price) {
             this.title = title;
             this.author = author;
             this.publisher = publisher;

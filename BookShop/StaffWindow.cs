@@ -90,7 +90,8 @@ namespace edu.ksu.cis.masaaki
                     bookDialog.ClearDisplayItems();
                     if (bookDialog.ShowDialog() == DialogResult.Cancel) return;
                     // Edit Done button is pressed
-
+                    if (bookShop.AddBook(bookDialog.BookTitle, bookDialog.Author, bookDialog.Publisher, bookDialog.ISBN, bookDialog.Date, bookDialog.Price, bookDialog.Stock))
+                        MessageBox.Show("Book with ISBN number " + bookDialog.ISBN + " has already been added.");
                     return;
                 }
                 catch (BookShopException bsex)
