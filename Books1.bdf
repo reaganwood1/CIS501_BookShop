@@ -1,0 +1,52 @@
+AddCustomer# Albert# Eddie#  ealbert#   ae#   ealbert@gmail.com#  7911, Sacramento, CA, 66633# 497033274##
+AddCustomer# Anka# Paul# panka# ap# panka@ksu.edu#	6557, Portland, OL, 24536#	689202997##
+AddCustomer# Barrault# Jean-Louis # bjlouis #	bjl # 	bjlouis@yahoo.com # 	4951, Seattle, WA, 64366# 	863686873##
+AddCustomer# Beymer# Richard # 	rbeymert# br#	rbeymert@gmail.com # 	2219, San Jose, CA, 95188#	878156077##
+AddCustomer# Burton# Richard # rburton#	br# 	rburton@ksu.edu#	4949, Milwaukee, WI, 94407# 	985854286##
+AddCustomer# Buttner# Walfgang# wbuttner# wb#  wbuttner@yahoo.co.jp# 	4562, New Orleans, LA, 98941# 	976695747##
+AddCustomer# Buttons# Red# rbuttons# 	br# 	aileemb@ksu.edu#	2505, Richmond, VA, 46635# 	344039363##
+AddCustomer# Carton# Pauline# pcarton# pc#  	pcarton@ksu.edu# 	7323, Rochester, NY, 66329# 	748021360##
+AddCustomer# Connery# Sean# sconnery# 	cs# 	sconnery@ku.edu# 	3499, Columbia, SC, 11875#	791895112##
+AddCustomer# Danton# Ray# rdanton# 	dr# 	rdanton@ksu.edu# 	8771, Wilmington, NC, 50395# 	712469880##
+AddCustomer# Cadet# Agatha# AGATHAC#  AC#	agathac@ksu.edu# 	3300, San Antonio, TX, 38101# 	402823063##
+AddCustomer# Grove# Morgan# MGROVE# MG# 	mgrove@ksu.edu# 	2633, Hartford, CT, 80417# 	480681510##
+AddCustomer# Attwell# Noel# NOEL410#	 NA#	noel410@ksu.edu# 	6693, Jacksonville, FL, 95435# 	533715845##
+AddCustomer# Guiness# Alma# ALMAG#	AG#	almag@ksu.edu# 	8230, Salt Lake City, UT, 37655# 	946133780##
+AddCustomer# Attlee# Oliver# OLIVER# 	OA# 	oliver@ksu.edu# 	1806, Honolulu, HI, 75451# 	374085218##
+AddCustomer# Steve#Jobs#apple#sj# stevejobs@ksu.edu # 3300 Green Street, KS, 66503 # 8882221111##
+AddBook# The Girl Who Came Home: A Novel of the Titanic# Hazel Gayno# William Morrow Paperbacks# 978-0062316868#10.77# April 1, 2014#12##
+AddBook# A Wrinkle in Time: The Graphic Novel# Madeleine L'Engle# Square Fish# 978-1250056948# 11.38# March 31, 2015#9##
+AddBook#I've Got You Under My Skin: A Novel# Mary Higgins Clark# Pocket Books# 978-1476749082# 6.79# March 24, 2015#18##
+AddBook# Call the Midwife: A Memoir of Birth, Joy, and Hard Times# Jennifer Worth# Penguin Books; Rep Mti edition# 978-0143123255#9.52# August 29, 2012#15##
+AddBook# Ruth's Journey: The Authorized Novel of Mammy from Margaret Mitchell's Gone with the Wind# Donald McCaig# Atria Books# 978-1451643534#20.43# October 14, 2014#4##
+AddBook# What She Left Behind# Ellen Marie Wiseman# Kensington# 978-0758278456#9.13# December 31, 2013#52##
+AddBook# Dietland# Sarai Walker# Houghton Mifflin Harcourt# 978-0544373433#17.77# May 26, 2015#1##
+AddBook# All the Light We Cannot See: A Novel# Anthony Doerr# Scribner# 978-1476746586#14.53# May 6, 2014#81##
+AddBook# The Girl on the Train# Paula Hawkins# Riverhead Books# 978-1594633669#13.47# January 13, 2015#120##
+AddBook# What If?: Serious Scientific Answers to Absurd Hypothetical Questions# Randall Munroe# Houghton Mifflin Harcourt# 978-0544272996#12.57# September 2, 2014#68##
+AddBook# Essentialism: The Disciplined Pursuit of Less# Greg McKeown# Crown Businesst# 978-0804137386#17.50# April 15, 2014#53##
+AddBook# Steve Jobs# Walter Isaacson# Simon & Schuster# 978-1451648539#19.65#October 24, 2011#246##
+Login#apple#sj##
+AddBookToWishList#978-1250056948##
+AddBookToWishList#978-1476746586##
+AddBookToWishList#978-1451648539##
+AddBookToCart#978-1250056948##
+AddBookToCart#978-1594633669##
+CheckOut##
+AddBookToCart#978-1250056948##
+AddBookToCart#978-1594633669##
+AddBookToCart#978-0062316868##
+CheckOut##
+AddBookToCart#978-1594633669##
+AddBookToCart#978-1250056948##
+AddBookToCart#978-1476749082##
+AddBookToCart#978-1250056948##
+CheckOut##
+ProcessPendingTransaction#1##
+AddBookToCart#978-1594633669##
+AddBookToCart#978-1250056948##
+AddBookToCart#978-1476749082##
+AddBookToCart#978-1250056948##
+AddBookToCart#978-1476749082##
+
+

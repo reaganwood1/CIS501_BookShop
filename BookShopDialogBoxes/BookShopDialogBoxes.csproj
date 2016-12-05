@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8A40ABB0-E48D-4A33-A8BB-E2C767F30C99}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>edu.ksu.cis.masaaki</RootNamespace>
+    <AssemblyName>BookShopDialogBoxes</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BookDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookDialog.designer.cs">
+      <DependentUpon>BookDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BookInformationDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookInformationDialog.designer.cs">
+      <DependentUpon>BookInformationDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BookInWishListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BookInWishListDialog.Designer.cs">
+      <DependentUpon>BookInWishListDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BookShopException.cs" />
+    <Compile Include="CartDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CartDialog.designer.cs">
+      <DependentUpon>CartDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CustomerDialog.designer.cs">
+      <DependentUpon>CustomerDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DialogReturn.cs" />
+    <Compile Include="ListBooksDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListBooksDialog.designer.cs">
+      <DependentUpon>ListBooksDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListCompleteTransactionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListCompleteTransactionsDialog.designer.cs">
+      <DependentUpon>ListCompleteTransactionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListCustomersDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListCustomersDialog.designer.cs">
+      <DependentUpon>ListCustomersDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListPendingTransactionsDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListPendingTransactionsDialog.designer.cs">
+      <DependentUpon>ListPendingTransactionsDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LisTransactionHistoryDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LisTransactionHistoryDialog.designer.cs">
+      <DependentUpon>LisTransactionHistoryDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LoginDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginDialog.designer.cs">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SelectDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SelectDialog.designer.cs">
+      <DependentUpon>SelectDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowCompleteTransactionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowCompleteTransactionDialog.designer.cs">
+      <DependentUpon>ShowCompleteTransactionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowPendingTransactionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowPendingTransactionDialog.designer.cs">
+      <DependentUpon>ShowPendingTransactionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowTransactionDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowTransactionDialog.designer.cs">
+      <DependentUpon>ShowTransactionDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WishListDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WishListDialog.designer.cs">
+      <DependentUpon>WishListDialog.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="BookDialog.resx">
+      <DependentUpon>BookDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookInformationDialog.resx">
+      <DependentUpon>BookInformationDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BookInWishListDialog.resx">
+      <DependentUpon>BookInWishListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CartDialog.resx">
+      <DependentUpon>CartDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomerDialog.resx">
+      <DependentUpon>CustomerDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListBooksDialog.resx">
+      <DependentUpon>ListBooksDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListCompleteTransactionsDialog.resx">
+      <DependentUpon>ListCompleteTransactionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListCustomersDialog.resx">
+      <DependentUpon>ListCustomersDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ListPendingTransactionsDialog.resx">
+      <DependentUpon>ListPendingTransactionsDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LisTransactionHistoryDialog.resx">
+      <DependentUpon>LisTransactionHistoryDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginDialog.resx">
+      <DependentUpon>LoginDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="SelectDialog.resx">
+      <DependentUpon>SelectDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowCompleteTransactionDialog.resx">
+      <DependentUpon>ShowCompleteTransactionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowPendingTransactionDialog.resx">
+      <DependentUpon>ShowPendingTransactionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ShowTransactionDialog.resx">
+      <DependentUpon>ShowTransactionDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WishListDialog.resx">
+      <DependentUpon>WishListDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
