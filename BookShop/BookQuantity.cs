@@ -21,7 +21,7 @@ namespace edu.ksu.cis.masaaki
         /// <summary>
         /// price of the Book to be potentially purchased
         /// </summary>
-        private double price;
+        private decimal price;
 
         /// <summary>
         /// Book to be potentially purchased at a certain sum
@@ -40,7 +40,7 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <param name="price">price of the book when the Book was picked up</param>
         /// <param name="book">Book to be potentially purchased</param>
-        public BookQuantity(double price, Book book) {
+        public BookQuantity(decimal price, Book book) {
             this.quantity = 1;
             this.price = price;
             this.book = book;
