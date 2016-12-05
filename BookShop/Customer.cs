@@ -207,8 +207,11 @@ namespace edu.ksu.cis.masaaki
         /// Remove Book from the Wishlist
         /// </summary>
         /// <param name="book"></param>
-        public void RemoveBookFromWishlist(Book book) {
-            wishlist.Remove(book);
+        public bool RemoveBookFromWishlist(Book book) {
+            if (wishlist.Remove(book)) {
+                return true; // book was found and removed from the Wishlist
+            }
+            return false; // book was not found in the Wishlist
         }
 
         /// <summary>

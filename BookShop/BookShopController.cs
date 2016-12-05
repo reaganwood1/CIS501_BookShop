@@ -342,11 +342,12 @@ namespace edu.ksu.cis.masaaki
         /// <param name="book"></param>
         /// <returns></returns>
         public bool DeleteBookFromWishlist(Book book) {
-            if (LoggedIn()) { // customer logged in and Book can be removed
-                loggedIn.RemoveBookFromWishlist(book);
-                return true;
+            if (loggedIn.RemoveBookFromWishlist(book))
+            {
+                return true; // book was found and deleted from the wishlist
             }
-            return false; // Customer not logged in 
+            else
+                return false; // book was not found, and therefore, not deleted from the wishlist
         }
     }
 }

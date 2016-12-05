@@ -199,12 +199,12 @@ namespace edu.ksu.cis.masaaki
                         switch (bookInWishListDialog.Display())
                         {
                             case DialogReturn.AddToCart:
-                                // XXX 
-
+                                if (!bookShop.AddBookToCart("", books[wishListDialog.SelectedIndex])) // add Book by index into the List of books
+                                    MessageBox.Show("No stock of this book");
                                 continue;
                             case DialogReturn.Remove:
-                                // XXX
-
+                                if (bookShop.DeleteBookFromWishlist(books[wishListDialog.SelectedIndex])) // deletes the Book from the Wishlist
+                                    MessageBox.Show("Book not located in the Wishlist");
                                 continue;
                             case DialogReturn.Done: // Done
                                 continue;
@@ -231,21 +231,29 @@ namespace edu.ksu.cis.masaaki
                 try
                 {  // to capture an exception from SelectedIndex/SelectedItem of carDisplay
                     cartDialog.ClearDisplayItems();
-                    cartDialog.AddDisplayItems(null); // null is a dummy argument
-                    switch (cartDialog.Display())
-                    {
-                        case DialogReturn.CheckOut:  // check out
-                            // XXX
+                    if (bookShop.LoggedIn())
+                    { // user is logged in
+                        cartDialog.AddDisplayItems(null); // null is a dummy argument
+                        switch (cartDialog.Display())
+                        {
+                            case DialogReturn.CheckOut:  // check out
+                                                         // XXX
 
-                            return;
-                        case DialogReturn.ReturnBook: // remove a book
-                               // XXX
+                                return;
+                            case DialogReturn.ReturnBook: // remove a book
+                                                          // XXX
 
                                 continue;
-                        
-                        case DialogReturn.Done: // cancel
-                            return;
+
+                            case DialogReturn.Done: // cancel
+                                return;
+                        }
                     }
+                    else { // user is not logged in
+                        MessageBox.Show("This operation requires login");
+                        return;
+                    }
+                   
                 }
                 catch (BookShopException bsex)
                 {
