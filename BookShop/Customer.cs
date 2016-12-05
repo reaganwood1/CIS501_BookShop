@@ -199,8 +199,13 @@ namespace edu.ksu.cis.masaaki
         /// Removes a book from the shoppingCart
         /// </summary>
         /// <param name="book"></param>
-        public void RemoveBookFromCart(Book book) {
-            shoppingCart.DecrementQuantityOrRemoveBook(book);
+        public bool RemoveBookFromCart(Book book) {
+            if (shoppingCart.Contains(book)) {
+                shoppingCart.DecrementQuantityOrRemoveBook(book);
+                return true;
+            }
+            else
+                return false;
         }
 
         /// <summary>

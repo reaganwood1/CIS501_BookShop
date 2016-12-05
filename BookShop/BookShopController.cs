@@ -149,17 +149,27 @@ namespace edu.ksu.cis.masaaki
         }
 
         /// <summary>
-        /// Checks out the logged in user
+        /// Checks out the logged in user if books are available to check out
         /// </summary>
         /// <returns></returns>
         public bool CheckOut() {
-            if (LoggedIn()) { // customer logged in
                 Transaction trans;
-                loggedIn.Checkout(out trans); // Transaction returned in the out parameter
-                pendingTransactions.Add(trans); // completed Customer Transaction added to the pendingTransactions List to be Ok'd by the Staff member
+            if (loggedIn.Checkout(out trans))
+            {// Transaction returned in the out parameter
                 return true;
             }
-            return false; // no user was logged in
+            else
+                return false;
+        }
+
+        public bool RemoveBookFromShoppingCart(Book book) {
+            if (loggedIn.RemoveBookFromCart(book))
+            { // book is in the shopping cart
+                return true;
+            }
+            else {
+                return false; // book is not in the shopping cart
+            }
         }
 
         /// <summary>

@@ -185,32 +185,41 @@ namespace edu.ksu.cis.masaaki
                 { // to capture an excepton by SelectedItem/SelectedIndex of wishListDialog
                     wishListDialog.ClearDisplayItems();
                     List<Book> books;
-                    if (bookShop.GetWishList(out books))
-                    { // user is logged in
-                        List<string> booksArrayDisplay = new List<string>();
-                        foreach (Book b in books)
-                        { // gets the books in the proper format for display
-                            booksArrayDisplay.Add(b.GetTitleAndAuthor());
+                    if (bookShop.LoggedIn()) // check to see if user is loggedin
+                    {
+                        if (bookShop.GetWishList(out books))
+                        { // user is logged in
+                            List<string> booksArrayDisplay = new List<string>();
+                            foreach (Book b in books)
+                            { // gets the books in the proper format for display
+                                booksArrayDisplay.Add(b.GetTitleAndAuthor());
+                            }
+                            wishListDialog.AddDisplayItems(booksArrayDisplay.ToArray());  // XXX null is a dummy argument
+                            if (wishListDialog.Display() == DialogReturn.Done) return;
+                            // select is pressed
+                            //XXX 
+                            switch (bookInWishListDialog.Display())
+                            {
+                                case DialogReturn.AddToCart:
+                                    if (!bookShop.AddBookToCart("", books[wishListDialog.SelectedIndex])) // add Book by index into the List of books
+                                        MessageBox.Show("No stock of this book");
+                                    continue;
+                                case DialogReturn.Remove:
+                                    if (bookShop.DeleteBookFromWishlist(books[wishListDialog.SelectedIndex])) // deletes the Book from the Wishlist
+                                        MessageBox.Show("Book not located in the Wishlist");
+                                    continue;
+                                case DialogReturn.Done: // Done
+                                    continue;
+                            }
                         }
-                        wishListDialog.AddDisplayItems(booksArrayDisplay.ToArray());  // XXX null is a dummy argument
-                        if (wishListDialog.Display() == DialogReturn.Done) return;
-                        // select is pressed
-                        //XXX 
-                        switch (bookInWishListDialog.Display())
+                        else
                         {
-                            case DialogReturn.AddToCart:
-                                if (!bookShop.AddBookToCart("", books[wishListDialog.SelectedIndex])) // add Book by index into the List of books
-                                    MessageBox.Show("No stock of this book");
-                                continue;
-                            case DialogReturn.Remove:
-                                if (bookShop.DeleteBookFromWishlist(books[wishListDialog.SelectedIndex])) // deletes the Book from the Wishlist
-                                    MessageBox.Show("Book not located in the Wishlist");
-                                continue;
-                            case DialogReturn.Done: // Done
-                                continue;
+                            MessageBox.Show("Shopping Cart is empty");
+                            return;
                         }
                     }
-                    else {
+                    else
+                    {
                         MessageBox.Show("User not logged in");
                         return;
                     }
@@ -231,23 +240,43 @@ namespace edu.ksu.cis.masaaki
                 try
                 {  // to capture an exception from SelectedIndex/SelectedItem of carDisplay
                     cartDialog.ClearDisplayItems();
+
                     if (bookShop.LoggedIn())
                     { // user is logged in
-                        cartDialog.AddDisplayItems(null); // null is a dummy argument
-                        switch (cartDialog.Display())
-                        {
-                            case DialogReturn.CheckOut:  // check out
-                                                         // XXX
+                      //-----------------------------------
+                        Transaction trans;
+                        if (bookShop.GetShoppingCart(out trans)) 
+                        { // shopping cart has books
+                            List<string> booksStrings = new List<string>();
+                            List < Book > books = trans.GetAllBooksInTransaction();
+                            decimal totalPrice = 0;
+                            foreach (Book b in books) {
+                                booksStrings.Add(b.Title + " BY " + b.Author + ": " + b.Quantity + "\t " + b.Price);
+                                totalPrice = totalPrice + b.Price;
+                            }
+                            cartDialog.AddDisplayItems(booksStrings, "==========================", "Total Price : " + totalPrice); // null is a dummy argument
+                            switch (cartDialog.Display())
+                            {
+                                case DialogReturn.CheckOut:  // check out
+                                    bookShop.CheckOut();
+                                    return;
+                                case DialogReturn.ReturnBook: // remove a book
+                                    if (cartDialog.SelectedItem is Book) {
 
-                                return;
-                            case DialogReturn.ReturnBook: // remove a book
-                                                          // XXX
+                                    }
+                                    bookShop.RemoveBookFromShoppingCart(
 
-                                continue;
+                                    continue;
 
-                            case DialogReturn.Done: // cancel
-                                return;
+                                case DialogReturn.Done: // cancel
+                                    return;
+                            }
                         }
+                        else {
+                            MessageBox.Show("Cart is empty");
+                            return;
+                        }
+                        //-----------------------------------
                     }
                     else { // user is not logged in
                         MessageBox.Show("This operation requires login");

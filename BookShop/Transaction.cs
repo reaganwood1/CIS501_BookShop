@@ -56,6 +56,22 @@ namespace edu.ksu.cis.masaaki
         }
 
         /// <summary>
+        /// Returns whether the book is in the Transactions
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
+        public bool Contains(Book book) {
+            return dictionaryOfBooks.ContainsKey(book);
+        }
+
+        /// <summary>
+        /// Returns all of the Books in the Transaction
+        /// </summary>
+        /// <returns></returns>
+        public List<Book> GetAllBooksInTransaction() {
+            return dictionaryOfBooks.Keys.ToList();
+        }
+        /// <summary>
         /// decrement the quantity of a book and then check if the transaction no longer contains a type of the book
         /// </summary>
         /// <param name="b"></param>
