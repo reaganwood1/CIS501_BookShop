@@ -14,14 +14,35 @@ namespace edu.ksu.cis.masaaki
         private string title;
 
         /// <summary>
+        /// public getter for title
+        /// </summary>
+        public string Title {
+            get;
+        }
+
+        /// <summary>
         /// author of the book
         /// </summary>
         private string author;
 
         /// <summary>
+        /// public getter for author
+        /// </summary>
+        public string Author {
+            get;
+        }
+
+        /// <summary>
         /// author of the book
         /// </summary>
         private string publisher;
+
+        /// <summary>
+        /// public getter for publisher
+        /// </summary>
+        public string Publisher {
+            get;
+        }
 
         /// <summary>
         /// isbn number of the book
@@ -32,6 +53,13 @@ namespace edu.ksu.cis.masaaki
         /// publish date of the book
         /// </summary>
         private string publishDate;
+
+        /// <summary>
+        /// public getter for publishDate
+        /// </summary>
+        public string PublishDate {
+            get;
+        }
 
         /// <summary>
         /// price of the book
@@ -49,6 +77,13 @@ namespace edu.ksu.cis.masaaki
         /// quantity of books available
         /// </summary>
         private int quantity;
+
+        /// <summary>
+        /// public getter for quantity
+        /// </summary>
+        public int Quantity {
+            get;
+        }
 
         /// <summary>
         /// Constructor for a Book. 
@@ -86,22 +121,6 @@ namespace edu.ksu.cis.masaaki
             this.isbn = isbn;
             this.publishDate = publishDate;
             this.price = price;
-        }
-
-        /// <summary>
-        /// description information about the book
-        /// </summary>
-        /// <returns></returns>
-        public string DisplayBookDescription() {
-            return publisher + ", " + isbn + " (" + publishDate + ")";
-        }
-
-        /// <summary>
-        /// title and author of the book
-        /// </summary>
-        /// <returns></returns>
-        public string DisplayBookTitleAndAuthor() {
-            return title + " \"" + author + "\"";
         }
 
         /// <summary>
