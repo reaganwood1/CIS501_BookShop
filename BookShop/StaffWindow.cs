@@ -115,24 +115,28 @@ namespace edu.ksu.cis.masaaki
                     listBooksDialog.AddDisplayItems(bookShop.GetAllBooks().ToArray()); //null is a dummy argument
                     if (listBooksDialog.Display() == DialogReturn.Done) return;
                     // select is pressed
-
-                    while (true)
+                    if (listBooksDialog.SelectedItem is Book) // checks to see that the item selected is a Book, if it's not, then the user didn't select anything in this case
                     {
-  
-                        try
-                        { // to capture an exception from Price/Stock of bookDialog
-                            if (bookDialog.Display() == DialogReturn.Cancel) break;
-                            
-                            bookShop.EditBookInformation(bookDialog.BookTitle, bookDialog.Author, bookDialog.Publisher, bookDialog.Price, bookDialog.Stock, bookDialog.ISBN, bookDialog.Date, (Book)listBooksDialog.SelectedItem);
-
-                            break;
-                        }
-                        catch (BookShopException bsex)
+                        while (true)
                         {
-                            MessageBox.Show(this, bsex.ErrorMessage);
-                            continue;
+
+                            try
+                            { // to capture an exception from Price/Stock of bookDialog
+                                if (bookDialog.Display() == DialogReturn.Cancel) break;
+
+                                bookShop.EditBookInformation(bookDialog.BookTitle, bookDialog.Author, bookDialog.Publisher, bookDialog.Price, bookDialog.Stock, bookDialog.ISBN, bookDialog.Date, (Book)listBooksDialog.SelectedItem);
+
+                                break;
+                            }
+                            catch (BookShopException bsex)
+                            {
+                                MessageBox.Show(this, bsex.ErrorMessage);
+                                continue;
+                            }
                         }
                     }
+                    else // no line was selected
+                        MessageBox.Show("Select a Line");
                 }
                 catch (BookShopException bsex)
                 {
