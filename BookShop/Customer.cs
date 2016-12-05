@@ -112,12 +112,12 @@ namespace edu.ksu.cis.masaaki
         /// <summary>
         /// telephone number of customer
         /// </summary>
-        private int telephoneNumber;
+        private string telephoneNumber;
 
         /// <summary>
         /// public getter for telephoneNumber
         /// </summary>
-        public int TelephoneNumber {
+        public string TelephoneNumber {
             get
             {
                 return telephoneNumber;
@@ -133,7 +133,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="password"></param>
         /// <param name="emailAddress"></param>
         /// <param name="telephoneNumber"></param>
-        public Customer(string firstName, string lastName, string userName, string password, string emailAddress, int telephoneNumber, string address) {
+        public Customer(string firstName, string lastName, string userName, string password, string emailAddress, string telephoneNumber, string address) {
             this.firstName = firstName;
             this.lastName = lastName;
             this.userName = userName;
@@ -146,7 +146,7 @@ namespace edu.ksu.cis.masaaki
             allTransactions = new List<Transaction>();
         }
 
-        public void EditCustomerInformation(string firstName, string lastName, string userName, string password, string emailAddress, int telephoneNumber, string address)
+        public void EditCustomerInformation(string firstName, string lastName, string userName, string password, string emailAddress, string telephoneNumber, string address)
         {
             this.firstName = firstName;
             this.lastName = lastName;

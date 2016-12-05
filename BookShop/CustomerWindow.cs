@@ -69,7 +69,7 @@ namespace edu.ksu.cis.masaaki
                 // XXX Login Button is pressed
 
                 if (bookShop.Login(loginDialog.UserName, loginDialog.Password)) {
-                    throw new BookShopException("Login Successful");
+                    MessageBox.Show("Login Successful");
                 } else
                     throw new BookShopException("Login Failed"); 
             }
@@ -87,8 +87,9 @@ namespace edu.ksu.cis.masaaki
                 // XXX Register Button event handler
                 customerDialog.ClearDisplayItems();
                 if (customerDialog.Display() == DialogReturn.Cancel) return;
-                    // XXX pick up information from customerDialog by calling its properties
-                    // and register a new customer
+                // XXX pick up information from customerDialog by calling its properties
+                // and register a new customer
+                bookShop.AddCustomer(customerDialog.FirstName, customerDialog.LastName, customerDialog.UserName, customerDialog.Password, customerDialog.EMailAddress, customerDialog.Address, customerDialog.TelephoneNumber);
             }
             catch (BookShopException bsex)
             {

@@ -37,7 +37,7 @@ namespace edu.ksu.cis.masaaki
         /// Constructor for the BookShopController
         /// </summary>
         public BookShopController() {
-            loggedIn = new Customer("", "", "", "", "", 0, "");
+            loggedIn = new Customer("", "", "", "", "", "", "");
             completeTransactions = new List<Transaction>();
             pendingTransactions = new List<Transaction>();
             allBooks = new List<Book>();
@@ -54,7 +54,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="email"></param>
         /// <param name="address"></param>
         /// <param name="telephoneNumber"></param>
-        public void AddCustomer(string firstName, string lastName, string userName, string password, string email, string address, int telephoneNumber) {
+        public void AddCustomer(string firstName, string lastName, string userName, string password, string email, string address, string telephoneNumber) {
             Customer c1 = new Customer(firstName, lastName, userName, password, email, telephoneNumber, address);
             allCustomers.Add(c1);
         }
@@ -171,7 +171,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="address"></param>
         /// <param name="number"></param>
         /// <returns></returns>
-        public bool EditUserInformation(string firstName, string lastName, string userName, string password, string email, string address, int number) {
+        public bool EditUserInformation(string firstName, string lastName, string userName, string password, string email, string address, string number) {
             if (LoggedIn()) {
                 loggedIn.EditCustomerInformation(firstName, lastName, userName, password, email, number, address);
                 return true;
@@ -186,7 +186,7 @@ namespace edu.ksu.cis.masaaki
         public bool Logout() {
             if (LoggedIn()) // logged in true
             {
-                loggedIn = new Customer("", "", "", "", "", 0, ""); // create blank user swapped with new reference as to not destory the old one
+                loggedIn = new Customer("", "", "", "", "", "", ""); // create blank user swapped with new reference as to not destory the old one
                 return true;
             }
             else { // no tlogged in
