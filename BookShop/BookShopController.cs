@@ -119,27 +119,26 @@ namespace edu.ksu.cis.masaaki
         /// <param name="isbn"></param>
         /// <returns></returns>
         public bool AddBookToWishlist(string isbnOptionalProvided, Book bookOptionalProvided) {
-            if (LoggedIn())
+
+            if (bookOptionalProvided == null)
             {
-                if (bookOptionalProvided == null)
+                foreach (Book book in allBooks) // search through the books until you find a ma
                 {
-                    foreach (Book book in allBooks)
+                    if (book.Isbn.Equals(isbnOptionalProvided) && !loggedIn.GetWishList().Contains(book)) // book is found, break out of loop and add book to the logged in customer's wishlist if not already there
                     {
-                        if (book.Isbn.Equals(isbnOptionalProvided)) // book is found, break out of loop and add book to the logged in customer's shopping cart
-                        {
-                            loggedIn.AddBookToWishlist(book);
-                            return true;
-                        }
-                    }
+                        loggedIn.AddBookToWishlist(book); // book added to the wishlist
+                        return true;
+                    } 
                 }
-                else {
-                    loggedIn.AddBookToWishlist(bookOptionalProvided);
-                    return true;
-                }
-                
             }
-            // no customer was logged in
-            return false;
+            else if (!loggedIn.GetWishList().Contains(bookOptionalProvided)) // quantity is satisfactory
+            {
+
+                loggedIn.AddBookToWishlist(bookOptionalProvided); // add the book to the wishlist
+                return true;
+            }
+
+            return false; // book is in the wishlist
         }
 
         /// <summary>
