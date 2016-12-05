@@ -39,6 +39,13 @@ namespace edu.ksu.cis.masaaki
         private double price;
 
         /// <summary>
+        /// public getter for the price
+        /// </summary>
+        public double Price {
+            get;
+        }
+
+        /// <summary>
         /// quantity of books available
         /// </summary>
         private int quantity;

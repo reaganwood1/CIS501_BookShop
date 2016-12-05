@@ -11,7 +11,12 @@ namespace edu.ksu.cis.masaaki
         /// <summary>
         /// number of Books that will be potentially purchased
         /// </summary>
-        private int bookQuantity;
+        private int quantity;
+
+
+        public int Quantity {
+            get;
+        }
 
         /// <summary>
         /// price of the Book to be potentially purchased
@@ -36,7 +41,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="price">price of the book when the Book was picked up</param>
         /// <param name="book">Book to be potentially purchased</param>
         public BookQuantity(double price, Book book) {
-            this.bookQuantity = 1;
+            this.quantity = 1;
             this.price = price;
             this.book = book;
         }
@@ -46,8 +51,9 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <returns></returns>
         public bool DecrementQuantity() {
-            if (bookQuantity > 0) {
-                bookQuantity--;
+            if (quantity > 0) {
+                quantity--;
+                book.AddToBookQuantity();
                 return true;
             }
             return false;
@@ -60,7 +66,7 @@ namespace edu.ksu.cis.masaaki
         public bool IncremenentQuantity() {
             if (book.DecrementIfAvailable())
             {
-                bookQuantity++;
+                quantity++;
                 return true;
             }
             return false;

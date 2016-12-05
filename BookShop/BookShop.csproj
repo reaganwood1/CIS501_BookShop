@@ -67,6 +67,7 @@
     <Compile Include="StaffWindow.Designer.cs">
       <DependentUpon>StaffWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Transaction.cs" />
     <EmbeddedResource Include="BookShop.resx">
       <DependentUpon>BookShop.cs</DependentUpon>
     </EmbeddedResource>
