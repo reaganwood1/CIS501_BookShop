@@ -69,7 +69,7 @@ namespace edu.ksu.cis.masaaki
         /// Removes the transaction from the customer
         /// </summary>
         public void RemoveTransactions() {
-            customer.RemoveTransactionFromAllTransactions();
+            owner.RemoveTransactionFromAllTransactions();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace edu.ksu.cis.masaaki
         public override string ToString()
         {
             StringBuilder returnString = new StringBuilder("");
-            returnString.Append(customer.userName + ": ");
+            returnString.Append(owner.userName + ": ");
             foreach (Book b in dictionaryOfBooks.Keys) {
                 returnString.Append(b.DisplayBookTitleAndAuthor() + "(" + dictionaryOfBooks[b].Quantity + ").\t");
             }
