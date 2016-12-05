@@ -13,7 +13,7 @@ namespace edu.ksu.cis.masaaki
     public partial class CustomerWindow : Form
     {
         // XXX add more fields if necessary
-
+        BookShopController bookShop;
         CustomerDialog customerDialog;
         LoginDialog loginDialog;
         ListBooksDialog listBooksDialog;
@@ -27,6 +27,14 @@ namespace edu.ksu.cis.masaaki
         public CustomerWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// overloaded constructor to set the BookShopController object and also call intialize component
+        /// </summary>
+        /// <param name="bookShop"></param>
+        public CustomerWindow(BookShopController bookShop) : this() {
+            this.bookShop = bookShop;
         }
 
         // XXX You may add overriding constructors (constructors with different set of arguments).
@@ -49,9 +57,14 @@ namespace edu.ksu.cis.masaaki
         private void bnLogin_Click(object sender, EventArgs e)
         {
             try
-            {  // throw exception if the customer is not found
+            {
+                // throw exception if the customer is not found
                 // XXX Login Button event handler
                 // First, you may want to check if anyone is logged in
+                if (bookShop.LoggedIn()) {
+                    throw new BookShopException("User already logged in");
+                }
+
                 if (loginDialog.Display() == DialogReturn.Cancel) return;
                 // XXX Login Button is pressed
                 

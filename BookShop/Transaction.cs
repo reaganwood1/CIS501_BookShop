@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
-    class Transaction
+    public class Transaction
     {
         /// <summary>
         /// allBooks that are part of the Transaction
@@ -69,7 +69,7 @@ namespace edu.ksu.cis.masaaki
         /// Removes the transaction from the customer
         /// </summary>
         public void RemoveTransactions() {
-            owner.RemoveTransactionFromAllTransactions();
+            owner.RemoveTransactionFromAllTransactions(this);
         }
 
         /// <summary>
@@ -79,9 +79,9 @@ namespace edu.ksu.cis.masaaki
         public override string ToString()
         {
             StringBuilder returnString = new StringBuilder("");
-            returnString.Append(owner.userName + ": ");
+            returnString.Append(owner.UserName + ": ");
             foreach (Book b in dictionaryOfBooks.Keys) {
-                returnString.Append(b.DisplayBookTitleAndAuthor() + "(" + dictionaryOfBooks[b].Quantity + ").\t");
+                returnString.Append(b.Title + " " + b.Author + " " + "(" + dictionaryOfBooks[b].Quantity + ").\t");
             }
             return returnString.ToString();
             

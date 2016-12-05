@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
-    class BookQuantity
+    public class BookQuantity
     {
         /// <summary>
         /// number of Books that will be potentially purchased

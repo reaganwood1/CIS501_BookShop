@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
-    class Customer
+    public class Customer
     {
         /// <summary>
         /// Holds the wishlist of books that a customer wants
@@ -32,7 +32,9 @@ namespace edu.ksu.cis.masaaki
         /// public getter for the firstName
         /// </summary>
         public string FirstName {
-            get;
+            get {
+                return firstName;
+            }
         }
 
         /// <summary>
@@ -44,7 +46,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for the last name
         /// </summary>
         public string LastName {
-            get;
+            get
+            {
+                return lastName;
+            }
         }
 
         /// <summary>
@@ -56,7 +61,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for userName
         /// </summary>
         public string UserName {
-            get;
+            get
+            {
+                return userName;
+            }
         }
 
         /// <summary>
@@ -68,7 +76,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for password
         /// </summary>
         public string Password {
-            get;
+            get
+            {
+                return password;
+            }
         }
 
         /// <summary>
@@ -92,7 +103,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for address
         /// </summary>
         public string Address {
-            get;
+            get
+            {
+                return address;
+            }
         }
 
         /// <summary>
@@ -104,7 +118,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for telephoneNumber
         /// </summary>
         public int TelephoneNumber {
-            get;
+            get
+            {
+                return telephoneNumber;
+            }
         }
 
         /// <summary>

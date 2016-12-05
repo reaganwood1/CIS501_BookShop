@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
-    class Book
+    public class Book
     {
         /// <summary>
         /// title of the book

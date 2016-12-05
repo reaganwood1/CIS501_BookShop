@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
-    class BookShopController
+    public class BookShopController
     {
         /// <summary>
         /// listing of all the completed transactions that have went through and been accepted by the staff
@@ -37,6 +37,7 @@ namespace edu.ksu.cis.masaaki
         /// Constructor for the BookShopController
         /// </summary>
         public BookShopController() {
+            loggedIn = new Customer("", "", "", "", "", 0, "");
             completeTransactions = new List<Transaction>();
             pendingTransactions = new List<Transaction>();
             allBooks = new List<Book>();

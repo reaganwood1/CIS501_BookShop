@@ -16,10 +16,11 @@ namespace edu.ksu.cis.masaaki
     {
         StaffWindow staffWindow;
         CustomerWindow customerWindow;
-        // XXX You can add more fields
+        BookShopController bookShop;
        
         public BookShop()
         {
+            bookShop = new BookShopController(); // initialize the bookShopController
             InitializeComponent();
         }
         private void BookShop_Load(object sender, EventArgs e)
@@ -29,7 +30,7 @@ namespace edu.ksu.cis.masaaki
             staffWindow = new StaffWindow();
             staffWindow.StartPosition = FormStartPosition.Manual;
             staffWindow.Location = new Point(600, 100);
-            customerWindow = new CustomerWindow();
+            customerWindow = new CustomerWindow(bookShop);
             customerWindow.StartPosition = FormStartPosition.Manual;
             customerWindow.Location = new Point(100, 100);    
         }
