@@ -100,9 +100,12 @@ namespace edu.ksu.cis.masaaki
         private void bnEditSelfInfo_Click(object sender, EventArgs e)
         {
             // XXX Edit Self Info button event handler
-
+            if (!bookShop.LoggedIn())
+                throw new BookShopException("This operation requires login");
             if (customerDialog.Display() == DialogReturn.Cancel) return;
             // XXX Done button is pressed
+            // edit the customer information
+            bookShop.EditUserInformation(customerDialog.FirstName, customerDialog.LastName, customerDialog.UserName, customerDialog.Password, customerDialog.EMailAddress, customerDialog.Address, customerDialog.TelephoneNumber);
         }
 
         private void bnBook_Click(object sender, EventArgs e)
@@ -237,6 +240,8 @@ namespace edu.ksu.cis.masaaki
         private void bnLogout_Click(object sender, EventArgs e)
         {
             // XXX Logout  button event handler
+            if (!bookShop.Logout())
+                MessageBox.Show("Nobody is logged in");
          
         }
     }
