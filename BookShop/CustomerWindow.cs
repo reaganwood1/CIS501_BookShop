@@ -89,7 +89,9 @@ namespace edu.ksu.cis.masaaki
                 if (customerDialog.Display() == DialogReturn.Cancel) return;
                 // XXX pick up information from customerDialog by calling its properties
                 // and register a new customer
-                bookShop.AddCustomer(customerDialog.FirstName, customerDialog.LastName, customerDialog.UserName, customerDialog.Password, customerDialog.EMailAddress, customerDialog.Address, customerDialog.TelephoneNumber);
+                if (!bookShop.AddCustomer(customerDialog.FirstName, customerDialog.LastName, customerDialog.UserName, customerDialog.Password, customerDialog.EMailAddress, customerDialog.Address, customerDialog.TelephoneNumber))
+                    MessageBox.Show("Username " + customerDialog.UserName + " has already been registered");
+
             }
             catch (BookShopException bsex)
             {
@@ -117,7 +119,7 @@ namespace edu.ksu.cis.masaaki
                 try
                 {  // to capture an exception from SelectedItem/SelectedIndex of listBooksDialog
                     listBooksDialog.ClearDisplayItems();
-                    listBooksDialog.AddDisplayItems(null); // XXX null is a dummy argument
+                    listBooksDialog.AddDisplayItems(bookShop.GetAllBooks().ToArray()); // adds all of the books to an array for display
                     if (listBooksDialog.Display() == DialogReturn.Done) return;
                     // select is pressed
 

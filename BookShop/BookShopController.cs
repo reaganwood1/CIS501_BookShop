@@ -45,7 +45,7 @@ namespace edu.ksu.cis.masaaki
         }
 
         /// <summary>
-        /// Create a customer and him to the Customer List
+        /// Create a customer and him to the Customer List if the userName doesn't already exist
         /// </summary>
         /// <param name="firstName"></param>
         /// <param name="lastName"></param>
@@ -54,9 +54,14 @@ namespace edu.ksu.cis.masaaki
         /// <param name="email"></param>
         /// <param name="address"></param>
         /// <param name="telephoneNumber"></param>
-        public void AddCustomer(string firstName, string lastName, string userName, string password, string email, string address, string telephoneNumber) {
+        public bool AddCustomer(string firstName, string lastName, string userName, string password, string email, string address, string telephoneNumber) {
+            foreach (Customer c in allCustomers) {
+                if (c.UserName == userName)
+                    return false;
+            }
             Customer c1 = new Customer(firstName, lastName, userName, password, email, telephoneNumber, address);
             allCustomers.Add(c1);
+            return true;
         }
 
         /// <summary>
