@@ -129,7 +129,6 @@ namespace edu.ksu.cis.masaaki
                         {
                             loggedIn.AddBookToWishlist(book);
                             return true;
-                            break;
                         }
                     }
                 }
@@ -264,10 +263,7 @@ namespace edu.ksu.cis.masaaki
         public bool GetWishList(out List<Book> list) {
             if (LoggedIn()) {
                 list = loggedIn.GetWishList();
-                if (list.Count > 0)
-                    return true;
-                else
-                    return false;
+                return true;
             }
             list = null;
             return false;

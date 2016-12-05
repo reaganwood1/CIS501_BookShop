@@ -143,8 +143,14 @@ namespace edu.ksu.cis.masaaki
                                 continue;
 
                             case DialogReturn.AddToWishList: // Add to Wishlist
-                                if (!bookShop.AddBookToWishlist("", book)) // add book by book title
+                                if (bookShop.LoggedIn())
+                                {
+                                    if (!bookShop.AddBookToWishlist("", book))  
+                                        MessageBox.Show("Book is already in the Wislist"); 
+                                } else { // nobod was logged in
                                     MessageBox.Show("This operation requires login");
+                                }
+                                
                                 continue;
 
                             case DialogReturn.Done: // cancel
@@ -172,22 +178,35 @@ namespace edu.ksu.cis.masaaki
                 try
                 { // to capture an excepton by SelectedItem/SelectedIndex of wishListDialog
                     wishListDialog.ClearDisplayItems();
-                    wishListDialog.AddDisplayItems(null);  // XXX null is a dummy argument
-                    if (wishListDialog.Display() == DialogReturn.Done) return;
-                    // select is pressed
-                    //XXX 
-                    switch (bookInWishListDialog.Display())
-                    {
-                        case DialogReturn.AddToCart:
-                            // XXX 
+                    List<Book> books;
+                    if (bookShop.GetWishList(out books))
+                    { // user is logged in
+                        List<string> booksArrayDisplay = new List<string>();
+                        foreach (Book b in books)
+                        { // gets the books in the proper format for display
+                            booksArrayDisplay.Add(b.GetTitleAndAuthor());
+                        }
+                        wishListDialog.AddDisplayItems(booksArrayDisplay.ToArray());  // XXX null is a dummy argument
+                        if (wishListDialog.Display() == DialogReturn.Done) return;
+                        // select is pressed
+                        //XXX 
+                        switch (bookInWishListDialog.Display())
+                        {
+                            case DialogReturn.AddToCart:
+                                // XXX 
 
-                            continue;
-                        case DialogReturn.Remove:
-                            // XXX
+                                continue;
+                            case DialogReturn.Remove:
+                                // XXX
 
-                            continue;
-                        case DialogReturn.Done: // Done
-                            continue;
+                                continue;
+                            case DialogReturn.Done: // Done
+                                continue;
+                        }
+                    }
+                    else {
+                        MessageBox.Show("User not logged in");
+                        return;
                     }
                 }
                 catch(BookShopException bsex)

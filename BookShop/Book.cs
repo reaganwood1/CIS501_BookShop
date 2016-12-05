@@ -177,5 +177,9 @@ namespace edu.ksu.cis.masaaki
         public void AddToBookQuantity() {
             quantity++;
         }
+
+        public string GetTitleAndAuthor() {
+            return title + " BY " + author; 
+        }
     }
 }
