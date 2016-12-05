@@ -123,21 +123,37 @@ namespace edu.ksu.cis.masaaki
                     if (listBooksDialog.Display() == DialogReturn.Done) return;
                     // select is pressed
 
-                    switch (bookInformationDialog.Display())
+                    if (listBooksDialog.SelectedItem is Book) // Checks to see that a book was selected before opening the bookInformationDialog
                     {
-                        case DialogReturn.AddToCart: // Add to Cart
-                           // XXX
-                            continue;
+                        Book book = (Book)listBooksDialog.SelectedItem; // get the book and set the properties for display
+                        bookInformationDialog.ClearDisplayItems();
+                        bookInformationDialog.Author = book.Author;
+                        bookInformationDialog.BookTitle = book.Title;
+                        bookInformationDialog.Publisher = book.Publisher;
+                        bookInformationDialog.Date = book.PublishDate;
+                        bookInformationDialog.Stock = book.Quantity;
+                        bookInformationDialog.ISBN = book.Isbn;
+                        bookInformationDialog.Price = book.Price;
+                        switch (bookInformationDialog.Display())
+                        {
+                            case DialogReturn.AddToCart: // Add to Cart
+                                if (!bookShop.AddBookToCart("", book)) { // could not add in this 
+                                    MessageBox.Show("This operation requires login");
+                                }                     
+                                continue;
 
-                        case DialogReturn.AddToWishList: // Add to Wishlist
-                            // XXX
+                            case DialogReturn.AddToWishList: // Add to Wishlist
+                                if (!bookShop.AddBookToWishlist("", book)) // add book by book title
+                                    MessageBox.Show("This operation requires login");
+                                continue;
 
-                            continue;
-
-                        case DialogReturn.Done: // cancel
-                            continue;
-                        default: return;
+                            case DialogReturn.Done: // cancel
+                                continue;
+                            default: return;
+                        }
                     }
+                    else
+                        MessageBox.Show("Select a line");
                 }
                 catch (BookShopException bsex)
                 {

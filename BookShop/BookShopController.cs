@@ -89,16 +89,24 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <param name="isbn"></param>
         /// <returns></returns>
-        public bool AddBookToCart(string isbn) {
+        public bool AddBookToCart(string isbnOptionalProvided, Book bookOptionalProvided) {
             if (LoggedIn()) {
-                foreach (Book book in allBooks)
+                if (bookOptionalProvided == null)
                 {
-                    if (book.Isbn.Equals(isbn)) // book is found, break out of loop and add book to the logged in customer's shopping cart
+                    foreach (Book book in allBooks)
                     {
-                        loggedIn.AddBookToCart(book);
-                        break;
+                        if (book.Isbn.Equals(isbnOptionalProvided)) // book is found, break out of loop and add book to the logged in customer's shopping cart
+                        {
+                            loggedIn.AddBookToCart(book);
+                            break;
+                        }
                     }
                 }
+                else {
+                    loggedIn.AddBookToCart(bookOptionalProvided);
+                    return true;
+                }
+                
             }
             // no customer was logged in
             return false;
@@ -110,17 +118,26 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <param name="isbn"></param>
         /// <returns></returns>
-        public bool AddBookToWishlist(string isbn) {
+        public bool AddBookToWishlist(string isbnOptionalProvided, Book bookOptionalProvided) {
             if (LoggedIn())
             {
-                foreach (Book book in allBooks)
+                if (bookOptionalProvided == null)
                 {
-                    if (book.Isbn.Equals(isbn)) // book is found, break out of loop and add book to the logged in customer's shopping cart
+                    foreach (Book book in allBooks)
                     {
-                        loggedIn.AddBookToWishlist(book);
-                        break;
+                        if (book.Isbn.Equals(isbnOptionalProvided)) // book is found, break out of loop and add book to the logged in customer's shopping cart
+                        {
+                            loggedIn.AddBookToWishlist(book);
+                            return true;
+                            break;
+                        }
                     }
                 }
+                else {
+                    loggedIn.AddBookToWishlist(bookOptionalProvided);
+                    return true;
+                }
+                
             }
             // no customer was logged in
             return false;
