@@ -152,7 +152,7 @@ namespace edu.ksu.cis.masaaki
                                 if (bookShop.LoggedIn())
                                 {
                                     if (!bookShop.AddBookToWishlist("", book))  
-                                        MessageBox.Show("Book is already in the Wislist"); 
+                                        MessageBox.Show("Book is already in the Wishlist"); 
                                 } else { // nobod was logged in
                                     MessageBox.Show("This operation requires login");
                                 }

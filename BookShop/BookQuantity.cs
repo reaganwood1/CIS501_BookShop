@@ -44,6 +44,9 @@ namespace edu.ksu.cis.masaaki
             this.quantity = 1;
             this.price = price;
             this.book = book;
+            if (!book.DecrementIfAvailable()) {// if no books are available,set the quantity to 0
+                quantity = 0;
+            } 
         }
 
         /// <summary>
