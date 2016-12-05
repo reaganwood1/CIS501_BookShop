@@ -148,21 +148,16 @@ namespace edu.ksu.cis.masaaki
         /// <param name="password"></param>
         /// <returns>Returns a tuple representing different cases of failure and success that can occur. For instance, failure could mean another user was logged in or the password
         ///  wasn't entered correctly</returns>
-        public Tuple<bool, string> Login(string userName, string password) {
-            if (LoggedIn())
-            {
-                return new Tuple<bool, string>(false, "Another user is logged in");
-            }
-            else {
+        public bool Login(string userName, string password) {
+            
                 foreach (Customer c in allCustomers)
                 {
                     if (c.UserName.Equals(userName) && c.Password.Equals(password)) {
                         loggedIn = c;
-                        return new Tuple<bool, string>(true, "");
+                        return true;
                     }
                 }
-                return new Tuple<bool, string>(false, "Login Failed");
-            }
+            return false;
         }
 
         /// <summary>

@@ -62,12 +62,16 @@ namespace edu.ksu.cis.masaaki
                 // XXX Login Button event handler
                 // First, you may want to check if anyone is logged in
                 if (bookShop.LoggedIn()) {
-                    throw new BookShopException("User already logged in");
+                    throw new BookShopException("Another user is already logged in");
                 }
 
                 if (loginDialog.Display() == DialogReturn.Cancel) return;
                 // XXX Login Button is pressed
-                
+
+                if (bookShop.Login(loginDialog.UserName, loginDialog.Password)) {
+                    throw new BookShopException("Login Successful");
+                } else
+                    throw new BookShopException("Login Failed"); 
             }
             catch(BookShopException bsex)
             {
