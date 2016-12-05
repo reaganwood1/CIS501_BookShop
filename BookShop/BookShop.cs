@@ -27,7 +27,7 @@ namespace edu.ksu.cis.masaaki
         {
             // XXX You may change the contructors of StaffWindow and CustomerWindow to take
             // some arguments
-            staffWindow = new StaffWindow();
+            staffWindow = new StaffWindow(bookShop);
             staffWindow.StartPosition = FormStartPosition.Manual;
             staffWindow.Location = new Point(600, 100);
             customerWindow = new CustomerWindow(bookShop);

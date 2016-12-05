@@ -17,7 +17,9 @@ namespace edu.ksu.cis.masaaki
         /// public getter for title
         /// </summary>
         public string Title {
-            get;
+            get {
+                return title;
+            }
         }
 
         /// <summary>
@@ -29,7 +31,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for author
         /// </summary>
         public string Author {
-            get;
+            get
+            {
+                return author;
+            }
         }
 
         /// <summary>
@@ -41,7 +46,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for publisher
         /// </summary>
         public string Publisher {
-            get;
+            get
+            {
+                return publisher;
+            }
         }
 
         /// <summary>
@@ -53,7 +61,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for isbn
         /// </summary>
         public string Isbn {
-            get;
+            get
+            {
+                return Isbn;
+            }
         }
 
         /// <summary>
@@ -65,7 +76,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for publishDate
         /// </summary>
         public string PublishDate {
-            get;
+            get
+            {
+                return publishDate;
+            }
         }
 
         /// <summary>
@@ -77,7 +91,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for the price
         /// </summary>
         public decimal Price {
-            get;
+            get
+            {
+                return price;
+            }
         }
 
         /// <summary>
@@ -89,7 +106,10 @@ namespace edu.ksu.cis.masaaki
         /// public getter for quantity
         /// </summary>
         public int Quantity {
-            get;
+            get
+            {
+                return quantity;
+            }
         }
 
         /// <summary>

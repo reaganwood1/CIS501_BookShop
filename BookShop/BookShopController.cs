@@ -56,7 +56,7 @@ namespace edu.ksu.cis.masaaki
         /// <param name="telephoneNumber"></param>
         public bool AddCustomer(string firstName, string lastName, string userName, string password, string email, string address, string telephoneNumber) {
             foreach (Customer c in allCustomers) {
-                if (c.UserName == userName)
+                if (c.UserName.Equals(userName))
                     return false;
             }
             Customer c1 = new Customer(firstName, lastName, userName, password, email, telephoneNumber, address);
