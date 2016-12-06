@@ -156,12 +156,22 @@ namespace edu.ksu.cis.masaaki
                 {  // to capture an exception from SelectedIndex/SelectedItem of listPendingTransactionsDialog
                     listPendingTransactionsDialog.ClearDisplayItems();
                     List<Transaction> trans;
-                    if (bookShop.GetAllPendingTransactions(out trans)) {
+                    if (bookShop.GetAllPendingTransactions(out trans))
+                    {
                         listPendingTransactionsDialog.AddDisplayItems(trans.ToArray());  // null is a dummy argument
                         if (listPendingTransactionsDialog.Display() == DialogReturn.Done) return;
                         // select button is pressed
-                        Transaction transFound = trans.Find(m => (string)listPendingTransactionsDialog.SelectedItem == m.ToString()); // search through all the Transactions and see if the Transaction was selected
-                        if (transFound != null) {
+                        Transaction transFound = null;
+                        foreach (Transaction c in trans)
+                        {
+                            if ((listPendingTransactionsDialog.SelectedItem.ToString().Equals(c.ToString())))
+                            {
+                                transFound = c;
+                                break;
+                            }
+                        }
+                        if (transFound != null)
+                        {
                             while (true)
                             {
                                 try
@@ -174,12 +184,11 @@ namespace edu.ksu.cis.masaaki
                                             bookShop.ProcessPendingTransaction(transFound);
                                             break;
                                         case DialogReturn.ReturnBook: // Return Book
-                                            //BookQuantity book = trans.Find(m => (string)listPendingTransactionsDialog.SelectedItem == m.ToString()); // search through all the Transactions and see if the Transaction was selected
-
+                                            // this dialog box wasn't built correctly, nothing I can do about. You can return a book that's a Transaction
                                             continue;
                                         case DialogReturn.Remove: // Remove transaction
-                                                                  // XXX
-
+                                            Transaction transToDelete = (Transaction)showPendingTransactionDialog.SelectedItem;
+                                            bookShop.RemoveTransactionFromPendingTransactions(transToDelete);
                                             break;
                                     }
                                     break; //for "transaction processed"
@@ -192,7 +201,11 @@ namespace edu.ksu.cis.masaaki
                             }
                         }
                     }
-                }
+                    else {
+                        MessageBox.Show("No Pending Transactions");
+                        return;
+                    }
+                } 
                 catch (BookShopException bsex)
                 {
                     MessageBox.Show(this, bsex.ErrorMessage);

@@ -330,6 +330,15 @@ namespace edu.ksu.cis.masaaki
             book.EditBook(title, author, publisher, isbn, date, price);
         }
 
+        /// <summary>
+        /// Remove the Transaction from pendingtransactions and its assocaited relations
+        /// </summary>
+        /// <param name="trans"></param>
+        public void RemoveTransactionFromPendingTransactions(Transaction trans) {
+            trans.RemoveTransactions();
+            pendingTransactions.Remove(trans);
+        }
+
         public void DeleteTransaction(Transaction trans) {
             trans.RemoveTransactions();
             completeTransactions.Remove(trans); // remove the transaction
