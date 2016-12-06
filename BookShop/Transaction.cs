@@ -15,7 +15,7 @@ namespace edu.ksu.cis.masaaki
         /// <summary>
         /// allBooks that are part of the Transaction
         /// </summary>
-        private Dictionary<Book, BookQuantity> dictionaryOfBooks;
+        private List<BookQuantity> transactionContents;
         
         /// <summary>
         /// Customer the Transaction belongs to
@@ -27,7 +27,7 @@ namespace edu.ksu.cis.masaaki
         /// Constructor for Transaction
         /// </summary>
         public Transaction(Customer c1) {
-            dictionaryOfBooks = new Dictionary<Book, BookQuantity>();
+            transactionContents = new List<BookQuantity>();
             owner = c1;
         }
 
@@ -50,15 +50,15 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <param name="b"></param>
         public void AddBook(Book b) {
-            if (dictionaryOfBooks.ContainsKey(b))
-            {
-                dictionaryOfBooks[b].IncremenentQuantity();
+            foreach (BookQuantity bq in transactionContents) {
+                if (bq.Book == b) {
+                    bq.IncremenentQuantity();
+                    return;
+                }
             }
-            else {
-                BookQuantity thisBook = new BookQuantity(b.Price, b);
-                dictionaryOfBooks.Add(b, thisBook);
-                size++; // one more type of book is now part of the transaction
-            }
+            BookQuantity thisBook = new BookQuantity(b.Price, b);
+            transactionContents.Add(thisBook);
+            size++; // one more type of book is now part of the transaction
         }
 
         /// <summary>
@@ -67,7 +67,14 @@ namespace edu.ksu.cis.masaaki
         /// <param name="book"></param>
         /// <returns>true if the book is in the transaction</returns>
         public bool Contains(Book book) {
-            return dictionaryOfBooks.ContainsKey(book);
+            foreach (BookQuantity bq in transactionContents) // iterate until you find the Book
+            {
+                if (bq.Book == book) // Book is found
+                {
+                    return true;
+                }
+            }
+            return false; // Book was never found
         }
 
         /// <summary>
@@ -75,7 +82,11 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <returns></returns>
         public List<Book> GetAllBooksInTransaction() {
-            return dictionaryOfBooks.Keys.ToList();
+            List<Book> books = new List<Book>();
+            foreach (BookQuantity bq in transactionContents) {
+                books.Add(bq.Book);
+            }
+            return books;
         }
 
         /// <summary>
@@ -83,7 +94,7 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <returns></returns>
         public List<BookQuantity> GetAllBookQuantitiesInTransaction() {
-            return dictionaryOfBooks.Values.ToList();
+            return transactionContents;
         }
 
         /// <summary>
@@ -91,10 +102,19 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <param name="b"></param>
         public void DecrementQuantityOrRemoveBook(Book b) {
-            // one less type of Book is present in the Transaction
-            if (!dictionaryOfBooks[b].DecrementQuantity() && dictionaryOfBooks[b].Quantity == 0) {
+            BookQuantity quan = null;
+            foreach (BookQuantity bq in transactionContents) {
+                if (bq.Book == b)
+                {
+                    quan = bq;
+                    break;
+                }
+            }
+
+            // remove one type from the Transaction
+            if (!quan.DecrementQuantity() && quan.Quantity == 0) {
                 size--;
-                dictionaryOfBooks.Remove(b);
+                transactionContents.Remove(quan);
             }
         }
 
@@ -113,8 +133,9 @@ namespace edu.ksu.cis.masaaki
         {
             StringBuilder returnString = new StringBuilder("");
             returnString.Append(owner.UserName + ": ");
-            foreach (Book b in dictionaryOfBooks.Keys) {
-                returnString.Append(b.Title + " " + b.Author + " " + "(" + dictionaryOfBooks[b].Quantity + ").\t");
+            foreach (BookQuantity bq in transactionContents) {
+
+                returnString.Append(bq.Book.Title + " " + bq.Book.Author + " " + "(" + bq.Quantity + ").\t");
             }
             return returnString.ToString();
             
