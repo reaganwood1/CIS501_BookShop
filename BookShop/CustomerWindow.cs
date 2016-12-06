@@ -229,7 +229,7 @@ namespace edu.ksu.cis.masaaki
                                         MessageBox.Show("No stock of this book");
                                     continue;
                                 case DialogReturn.Remove:
-                                    if (bookShop.DeleteBookFromWishlist(books[wishListDialog.SelectedIndex])) // deletes the Book from the Wishlist
+                                    if (!bookShop.DeleteBookFromWishlist(books[wishListDialog.SelectedIndex])) // deletes the Book from the Wishlist
                                         MessageBox.Show("Book not located in the Wishlist");
                                     continue;
                                 case DialogReturn.Done: // Done
