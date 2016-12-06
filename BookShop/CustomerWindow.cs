@@ -208,6 +208,14 @@ namespace edu.ksu.cis.masaaki
                             if (wishListDialog.Display() == DialogReturn.Done) return;
                             // select is pressed
                             //XXX 
+                            Book selected = (Book)wishListDialog.SelectedItem;
+                            bookInWishListDialog.BookTitle = selected.Title; // add all of the fields to the dialog
+                            bookInWishListDialog.Author = selected.Author;
+                            bookInWishListDialog.Publisher = selected.Publisher;
+                            bookInWishListDialog.Date = selected.PublishDate;
+                            bookInWishListDialog.Price = selected.Price;
+                            bookInWishListDialog.Stock = selected.Quantity;
+                            bookInWishListDialog.ISBN = selected.Isbn;
                             switch (bookInWishListDialog.Display())
                             {
                                 case DialogReturn.AddToCart:
