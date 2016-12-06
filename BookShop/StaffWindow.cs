@@ -155,36 +155,41 @@ namespace edu.ksu.cis.masaaki
                 try
                 {  // to capture an exception from SelectedIndex/SelectedItem of listPendingTransactionsDialog
                     listPendingTransactionsDialog.ClearDisplayItems();
-                    listPendingTransactionsDialog.AddDisplayItems(null);  // null is a dummy argument
-                    if (listPendingTransactionsDialog.Display() == DialogReturn.Done) return;
-                    // select button is pressed
-              
-                    while (true)
-                    {
-                        try
-                        {  // to capture an exception from SelectedItem/SelectedTransaction of showPendingTransactionDialog
-                            showPendingTransactionDialog.ClearDisplayItems();
-                            showPendingTransactionDialog.AddDisplayItems(null); // null is a dummy argument
-                            switch (showPendingTransactionDialog.Display())
+                    List<Transaction> trans;
+                    if (bookShop.GetAllPendingTransactions(out trans)) {
+                        listPendingTransactionsDialog.AddDisplayItems(trans.ToArray());  // null is a dummy argument
+                        if (listPendingTransactionsDialog.Display() == DialogReturn.Done) return;
+                        // select button is pressed
+                        Transaction transFound = trans.Find(m => (string)listPendingTransactionsDialog.SelectedItem == m.ToString()); // search through all the Transactions and see if the Transaction was selected
+                        if (transFound != null) {
+                            while (true)
                             {
-                                case DialogReturn.Approve:  // Transaction Processed
-                                    // XXX
-                                    break;
-                                case DialogReturn.ReturnBook: // Return Book
-                                    // XXX
-                                        
-                                    continue;
-                                case DialogReturn.Remove: // Remove transaction
-                                    // XXX
+                                try
+                                {  // to capture an exception from SelectedItem/SelectedTransaction of showPendingTransactionDialog
+                                    showPendingTransactionDialog.ClearDisplayItems();
+                                    showPendingTransactionDialog.AddDisplayItems(transFound); // null is a dummy argument
+                                    switch (showPendingTransactionDialog.Display())
+                                    {
+                                        case DialogReturn.Approve:  // Transaction Processed
+                                            bookShop.ProcessPendingTransaction(transFound);
+                                            break;
+                                        case DialogReturn.ReturnBook: // Return Book
+                                            //BookQuantity book = trans.Find(m => (string)listPendingTransactionsDialog.SelectedItem == m.ToString()); // search through all the Transactions and see if the Transaction was selected
 
-                                    break;
+                                            continue;
+                                        case DialogReturn.Remove: // Remove transaction
+                                                                  // XXX
+
+                                            break;
+                                    }
+                                    break; //for "transaction processed"
+                                }
+                                catch (BookShopException bsex)
+                                {
+                                    MessageBox.Show(this, bsex.ErrorMessage);
+                                    continue;
+                                }
                             }
-                            break; //for "transaction processed"
-                        }
-                        catch (BookShopException bsex)
-                        {
-                            MessageBox.Show(this, bsex.ErrorMessage);
-                            continue;
                         }
                     }
                 }
