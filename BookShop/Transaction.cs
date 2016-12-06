@@ -36,7 +36,9 @@ namespace edu.ksu.cis.masaaki
         /// public getter for size
         /// </summary>
         public int Size {
-            get;
+            get {
+                return size;
+            }
         }
 
         /// <summary>
@@ -71,13 +73,22 @@ namespace edu.ksu.cis.masaaki
         public List<Book> GetAllBooksInTransaction() {
             return dictionaryOfBooks.Keys.ToList();
         }
+
+        /// <summary>
+        /// Returns all of the BookQuantities for display purposes
+        /// </summary>
+        /// <returns></returns>
+        public List<BookQuantity> GetAllBookQuantitiesInTransaction() {
+            return dictionaryOfBooks.Values.ToList();
+        }
         /// <summary>
         /// decrement the quantity of a book and then check if the transaction no longer contains a type of the book
         /// </summary>
         /// <param name="b"></param>
         public void DecrementQuantityOrRemoveBook(Book b) {
-            if (dictionaryOfBooks[b].DecrementQuantity() && dictionaryOfBooks[b].Quantity == 0) {
-                size--;
+            size--;
+            if (!dictionaryOfBooks[b].DecrementQuantity() && dictionaryOfBooks[b].Quantity == 0) {
+                dictionaryOfBooks.Remove(b);
             }
         }
 

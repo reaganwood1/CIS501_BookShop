@@ -185,13 +185,5 @@ namespace edu.ksu.cis.masaaki
         public string GetTitleAndAuthor() {
             return title + " BY " + author; 
         }
-
-        /// <summary>
-        /// returns title, author, quantity, and price for display purposes
-        /// </summary>
-        /// <returns></returns>
-        public string GetTitleAuthorQuantityAndPrice() {
-            return "\"" + title + "\" BY " + author + ": " + quantity + "\t$" + price;  
-        }
     }
 }

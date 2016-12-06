@@ -15,13 +15,24 @@ namespace edu.ksu.cis.masaaki
 
 
         public int Quantity {
-            get;
+            get {
+                return quantity;
+            }
         }
 
         /// <summary>
         /// price of the Book to be potentially purchased
         /// </summary>
         private decimal price;
+
+        /// <summary>
+        /// public getter for the price
+        /// </summary>
+        public decimal Price {
+            get {
+                return price;
+            } 
+        }
 
         /// <summary>
         /// Book to be potentially purchased at a certain sum
@@ -32,7 +43,9 @@ namespace edu.ksu.cis.masaaki
         /// public getter for Book
         /// </summary>
         public Book Book {
-            get;
+            get {
+                return book;
+            }
         }
 
         /// <summary>
@@ -52,14 +65,18 @@ namespace edu.ksu.cis.masaaki
         /// <summary>
         /// Decrement the quantity if possible
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if books remain, false if none remain</returns>
         public bool DecrementQuantity() {
-            if (quantity > 0) {
+            if (quantity == 1)
+            {
                 quantity--;
                 book.AddToBookQuantity();
-                return true;
+                return false;
             }
-            return false;
+
+            quantity--;
+            book.AddToBookQuantity();
+            return true;
         }
 
         /// <summary>
@@ -85,6 +102,11 @@ namespace edu.ksu.cis.masaaki
                 return true;
             else
                 return false;
+        }
+
+        public override string ToString()
+        {
+            return book.GetTitleAndAuthor() + ": " + quantity + "\t$" + price;
         }
     }
 }

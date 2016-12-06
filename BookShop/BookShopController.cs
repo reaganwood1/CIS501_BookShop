@@ -156,6 +156,7 @@ namespace edu.ksu.cis.masaaki
                 Transaction trans;
             if (loggedIn.Checkout(out trans))
             {// Transaction returned in the out parameter
+                pendingTransactions.Add(trans);
                 return true;
             }
             else
@@ -249,15 +250,11 @@ namespace edu.ksu.cis.masaaki
         /// <param name="trans"></param>
         /// <returns></returns>
         public bool GetShoppingCart(out Transaction trans) {
-            if (LoggedIn()) {
                 trans = loggedIn.GetUserShoppingCart();
-                if (trans.Size > 0)
+                if (trans.GetAllBooksInTransaction().Count > 0)
                     return true; // customer has a shopping cart with items in it and is logged in 
                 else
                     return false; // no items in shopping cart
-            }
-            trans = null; // not logged in
-            return false;
         }
 
         /// <summary>

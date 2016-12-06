@@ -247,38 +247,36 @@ namespace edu.ksu.cis.masaaki
                         Transaction trans;
                         if (bookShop.GetShoppingCart(out trans)) 
                         { // shopping cart has books
-                            List<string> booksStrings = new List<string>();
-                            List < Book > books = trans.GetAllBooksInTransaction();
+                            List < BookQuantity > books = trans.GetAllBookQuantitiesInTransaction(); // get a listing of all the Books in the Transaction
                             decimal totalPrice = 0;
-                            foreach (Book b in books) {
-                                booksStrings.Add(b.Title + " BY " + b.Author + ": " + b.Quantity + "\t " + b.Price);
-                                totalPrice = totalPrice + b.Price;
+                            foreach (BookQuantity bq in books) { // add each Book to be printed
+                                cartDialog.AddDisplayItems(bq.ToString());
+                                totalPrice = totalPrice + bq.Price * bq.Quantity; // increment the total price
                             }
-                            cartDialog.AddDisplayItems(booksStrings, "==========================", "Total Price : " + totalPrice); // null is a dummy argument
+                            cartDialog.AddDisplayItems("==========================", "Total Price : " + totalPrice); // add other two lines to the output
                             switch (cartDialog.Display())
                             {
                                 case DialogReturn.CheckOut:  // check out
                                     bookShop.CheckOut();
                                     return;
                                 case DialogReturn.ReturnBook: // remove a book
-                                    if (cartDialog.SelectedItem is Book) {
-
-                                    }
-                                    bookShop.RemoveBookFromShoppingCart(
-
+                                    BookQuantity selectedBookQuantity = books.Find(m => (string)cartDialog.SelectedItem == m.ToString()); // search through all Books and see if one matches the string display
+                                    if (selectedBookQuantity != null) { // check if the selected item is a Book
+                                        bookShop.RemoveBookFromShoppingCart(selectedBookQuantity.Book);
+                                    } else // it's not a Book that was selected
+                                        MessageBox.Show("The Book was not found");
                                     continue;
 
                                 case DialogReturn.Done: // cancel
                                     return;
                             }
                         }
-                        else {
+                        else { // 
                             MessageBox.Show("Cart is empty");
                             return;
                         }
                         //-----------------------------------
-                    }
-                    else { // user is not logged in
+                    }else { // user is not logged in
                         MessageBox.Show("This operation requires login");
                         return;
                     }
@@ -300,15 +298,45 @@ namespace edu.ksu.cis.masaaki
                 
                 try
                 {  // to capture an exception from SelectedIndex/SelectedItem of listTransactionHistoryDialog
-                    listTransactionHistoryDialog.ClearDisplayItems();
-                    listTransactionHistoryDialog.AddDisplayItems(null); // null is a dummy argument
-                    if (listTransactionHistoryDialog.Display() == DialogReturn.Done) return;
-                    // Select is pressed
-                    
+                    if (bookShop.LoggedIn())
+                    { // user is logged in
+                        List<Transaction> trans; // stores the complete Transactions
+                        if (bookShop.GetUserTransactionHistory(out trans))
+                        { // transaction history found
+                            listTransactionHistoryDialog.ClearDisplayItems();
+                            foreach (Transaction t in trans) { // loop through each transaction and add the toString to be displayed
+                                listTransactionHistoryDialog.AddDisplayItems(t.ToString());
+                            }
+                            if (listTransactionHistoryDialog.Display() == DialogReturn.Done) return;
+                            // Select is pressed
 
-                    showTransactionDialog.ClearDisplayItems();
-                    showTransactionDialog.AddDisplayItems(null); // null is a dummy argument
-                    showTransactionDialog.ShowDialog();
+                            Transaction transFound = trans.Find(m => (string)listTransactionHistoryDialog.SelectedItem == m.ToString()); // search through all the Transactions and see if the Transaction was selected
+                            if (transFound != null)
+                            { // check if the selected item is a transaction
+                                showTransactionDialog.ClearDisplayItems();
+                                List<BookQuantity> listQuantities = transFound.GetAllBookQuantitiesInTransaction(); // get the bookquantities for the transaction
+                                Decimal totalPrice = 0;
+                                foreach (BookQuantity b in listQuantities) { // loop throught the BookQuantities and calculate the total cost and set the BookQuantities for display
+                                    showTransactionDialog.AddDisplayItems(b.ToString()); // add the BookQuantity ToString
+                                    totalPrice = totalPrice + b.Price * b.Quantity; // increment the totalPrice
+                                }
+                                showTransactionDialog.AddDisplayItems("===================================");
+                                showTransactionDialog.AddDisplayItems("Total Price : " + totalPrice); // add to the total price
+                                showTransactionDialog.ShowDialog();
+                            }
+                            else // it's not a Book that was selected
+                                MessageBox.Show("A line was selected");
+                        }
+                        else { // no transaction history to show
+                            MessageBox.Show("Transaction History is empty");
+                            return;
+                        }
+                    }
+                    else {
+                        MessageBox.Show("This operation requires login");
+                        return;
+                    }
+                        
                 }
                 catch(BookShopException bsex)
                 {
