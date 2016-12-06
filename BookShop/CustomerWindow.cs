@@ -68,7 +68,7 @@ namespace edu.ksu.cis.masaaki
                 if (loginDialog.Display() == DialogReturn.Cancel) return;
                 // XXX Login Button is pressed
 
-                if (bookShop.Login(loginDialog.UserName, loginDialog.Password)) {
+                if (bookShop.Login(loginDialog.UserName, loginDialog.Password)) { // Attempt to login
                     MessageBox.Show("Login Succeeded");
                 } else
                     throw new BookShopException("Login Failed"); 
@@ -153,7 +153,7 @@ namespace edu.ksu.cis.masaaki
                                 {
                                     if (!bookShop.AddBookToWishlist("", book))  
                                         MessageBox.Show("Book is already in the Wishlist"); 
-                                } else { // nobod was logged in
+                                } else { // nobody was logged in
                                     MessageBox.Show("This operation requires login");
                                 }
                                 

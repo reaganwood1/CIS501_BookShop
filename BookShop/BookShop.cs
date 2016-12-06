@@ -27,10 +27,10 @@ namespace edu.ksu.cis.masaaki
         {
             // XXX You may change the contructors of StaffWindow and CustomerWindow to take
             // some arguments
-            staffWindow = new StaffWindow(bookShop);
+            staffWindow = new StaffWindow(bookShop); // call overloaded constructor for StaffWindow
             staffWindow.StartPosition = FormStartPosition.Manual;
             staffWindow.Location = new Point(600, 100);
-            customerWindow = new CustomerWindow(bookShop);
+            customerWindow = new CustomerWindow(bookShop); // call overloaded Constructor for CustomerWindow
             customerWindow.StartPosition = FormStartPosition.Manual;
             customerWindow.Location = new Point(100, 100);    
         }

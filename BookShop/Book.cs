@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
+    /// <summary>
+    /// Represents a Book that will be sold at a store
+    /// </summary>
     [Serializable]
     public class Book
     {

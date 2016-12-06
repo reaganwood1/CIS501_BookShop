@@ -147,7 +147,7 @@ namespace edu.ksu.cis.masaaki
                             { // to capture an exception from Price/Stock of bookDialog
                                 Book book = (Book)listBooksDialog.SelectedItem;
                                 bookDialog.ClearDisplayItems();
-                                bookDialog.Author = book.Author;
+                                bookDialog.Author = book.Author; // set all of the windows for the display
                                 bookDialog.BookTitle = book.Title;
                                 bookDialog.Publisher = book.Publisher;
                                 bookDialog.Date = book.PublishDate;
@@ -155,9 +155,8 @@ namespace edu.ksu.cis.masaaki
                                 bookDialog.ISBN = book.Isbn;
                                 bookDialog.Price = book.Price;
                                 if (bookDialog.Display() == DialogReturn.Cancel) break;
-
+                                // edit the existing Book with potential new information
                                 bookShop.EditBookInformation(bookDialog.BookTitle, bookDialog.Author, bookDialog.Publisher, bookDialog.Price, bookDialog.Stock, bookDialog.ISBN, bookDialog.Date, (Book)listBooksDialog.SelectedItem);
-
                                 break;
                             }
                             catch (BookShopException bsex)
@@ -190,37 +189,37 @@ namespace edu.ksu.cis.masaaki
                     List<Transaction> trans;
                     if (bookShop.GetAllPendingTransactions(out trans))
                     {
-                        listPendingTransactionsDialog.AddDisplayItems(trans.ToArray());  // null is a dummy argument
+                        listPendingTransactionsDialog.AddDisplayItems(trans.ToArray());  // display array of pendingTransactions
                         if (listPendingTransactionsDialog.Display() == DialogReturn.Done) return;
                         // select button is pressed
                         Transaction transFound = null;
-                        foreach (Transaction c in trans)
+                        foreach (Transaction c in trans) // find the selected Transaction
                         {
                             if ((listPendingTransactionsDialog.SelectedItem.ToString().Equals(c.ToString())))
                             {
-                                transFound = c;
+                                transFound = c; // set Transaction when found
                                 break;
                             }
                         }
-                        if (transFound != null)
-                        {
+                        if (transFound != null) 
+                        { // Trnsaction was found
                             while (true)
                             {
                                 try
                                 {  // to capture an exception from SelectedItem/SelectedTransaction of showPendingTransactionDialog
                                     showPendingTransactionDialog.ClearDisplayItems();
-                                    showPendingTransactionDialog.AddDisplayItems(transFound); // null is a dummy argument
+                                    showPendingTransactionDialog.AddDisplayItems(transFound); // Display contents of the Transaction
                                     switch (showPendingTransactionDialog.Display())
                                     {
                                         case DialogReturn.Approve:  // Transaction Processed
-                                            bookShop.ProcessPendingTransaction(transFound);
+                                            bookShop.ProcessPendingTransaction(transFound); // move transaction to completed Transactions
                                             break;
                                         case DialogReturn.ReturnBook: // Return Book
                                             // this dialog box wasn't built correctly, nothing I can do about. You can return a book that's a Transaction
                                             continue;
                                         case DialogReturn.Remove: // Remove transaction
                                             Transaction transToDelete = (Transaction)showPendingTransactionDialog.SelectedItem;
-                                            bookShop.RemoveTransactionFromPendingTransactions(transToDelete);
+                                            bookShop.RemoveTransactionFromPendingTransactions(transToDelete); // Remove the Transaction
                                             break;
                                     }
                                     break; //for "transaction processed"
@@ -261,19 +260,19 @@ namespace edu.ksu.cis.masaaki
                         if (listCompleteTransactionsDialog.Display() == DialogReturn.Done) return;
                         // select button is pressed
                         Transaction transFound = null;
-                        foreach (Transaction c in trans) {
+                        foreach (Transaction c in trans) { // look for selected Transaction
                             if ((listCompleteTransactionsDialog.SelectedItem.ToString().Equals(c.ToString()))) {
                                 transFound = c;
                                 break;
                             }   
                         }
                         if (transFound != null)
-                        {
+                        { // Transaction found
                             showCompleteTransactionDialog.AddDisplayItems(transFound);
                             switch (showCompleteTransactionDialog.Display())
                             {
                                 case DialogReturn.Remove: // transaction Remove
-                                    bookShop.DeleteTransaction(transFound);
+                                    bookShop.DeleteTransaction(transFound); // Transaction will be deleted
 
                                     continue;
                                 case DialogReturn.Done:
@@ -312,8 +311,8 @@ namespace edu.ksu.cis.masaaki
                 using (FileStream f = new FileStream(saveFileDialog.FileName,
                          FileMode.Create,
                          FileAccess.Write, FileShare.None)) {
-                    Tuple<int, BookShopController> t = new Tuple<int, BookShopController>(1, bookShop);
-                    fo.Serialize(f, t);
+                    Tuple<int, BookShopController> t = new Tuple<int, BookShopController>(1, bookShop); // Store Bookshop as a Tuple
+                    fo.Serialize(f, t); // serielize the Tuple
                 }
             }
             catch (Exception)
@@ -338,7 +337,7 @@ namespace edu.ksu.cis.masaaki
                           FileAccess.Read)) {
                     Tuple<int, BookShopController> t = (Tuple<int, BookShopController>)fo.Deserialize(f);
                     List<Transaction> pending;
-                    t.Item2.GetAllPendingTransactions(out pending);
+                    t.Item2.GetAllPendingTransactions(out pending); // get fields to be set
                     List<Transaction> complete;
                     t.Item2.GetAllCompleteTransactions(out complete);
                     bookShop.SetNewVariableReferences(t.Item2.GetAllCustomers(), t.Item2.GetAllBooks(), pending, complete); // set the new reference variables.  

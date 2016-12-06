@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
+    /// <summary>
+    /// Holds a listing of Books and their quantity that are part of a lump purchase or potential purchase
+    /// </summary>
     [Serializable]
     public class Transaction
     {
@@ -54,7 +57,7 @@ namespace edu.ksu.cis.masaaki
             else {
                 BookQuantity thisBook = new BookQuantity(b.Price, b);
                 dictionaryOfBooks.Add(b, thisBook);
-                size++;
+                size++; // one more type of book is now part of the transaction
             }
         }
 
@@ -62,7 +65,7 @@ namespace edu.ksu.cis.masaaki
         /// Returns whether the book is in the Transactions
         /// </summary>
         /// <param name="book"></param>
-        /// <returns></returns>
+        /// <returns>true if the book is in the transaction</returns>
         public bool Contains(Book book) {
             return dictionaryOfBooks.ContainsKey(book);
         }
@@ -82,13 +85,15 @@ namespace edu.ksu.cis.masaaki
         public List<BookQuantity> GetAllBookQuantitiesInTransaction() {
             return dictionaryOfBooks.Values.ToList();
         }
+
         /// <summary>
         /// decrement the quantity of a book and then check if the transaction no longer contains a type of the book
         /// </summary>
         /// <param name="b"></param>
         public void DecrementQuantityOrRemoveBook(Book b) {
-            size--;
+            // one less type of Book is present in the Transaction
             if (!dictionaryOfBooks[b].DecrementQuantity() && dictionaryOfBooks[b].Quantity == 0) {
+                size--;
                 dictionaryOfBooks.Remove(b);
             }
         }
