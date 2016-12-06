@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
+    [Serializable]
     public class Customer
     {
         /// <summary>
@@ -91,7 +92,9 @@ namespace edu.ksu.cis.masaaki
         /// public getter for emailAddress
         /// </summary>
         public string EmailAddress {
-            get;
+            get {
+                return emailAddress;
+            }
         }
 
         /// <summary>

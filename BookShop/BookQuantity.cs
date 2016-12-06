@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
+    [Serializable]
     public class BookQuantity
     {
         /// <summary>

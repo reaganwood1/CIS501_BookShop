@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
+    [Serializable]
     public class BookShopController
     {
         /// <summary>
@@ -62,6 +63,26 @@ namespace edu.ksu.cis.masaaki
             Customer c1 = new Customer(firstName, lastName, userName, password, email, telephoneNumber, address);
             allCustomers.Add(c1);
             return true;
+        }
+
+        /// <summary>
+        /// Updates the fields of the BookShopController for when serielizing occurs, setting by reference didn't work for Serialization
+        /// </summary>
+        /// <param name="customers">new list of Customers</param>
+        /// <param name="books">new list of Books</param>
+        /// <param name="pendingTransactions">new PendingTransactions list</param>
+        /// <param name="completeTransactions">new complete Transactions list</param>
+        public void SetNewVariableReferences(List<Customer> customers, List<Book> books, List<Transaction> pendingTransactions, List<Transaction> completeTransactions) {
+            allBooks = books;
+            allCustomers = customers;
+            this.pendingTransactions = pendingTransactions;
+            this.completeTransactions = completeTransactions;
+
+            if (this.pendingTransactions == null)
+                this.pendingTransactions = new List<Transaction>();
+            if (this.completeTransactions == null)
+                this.completeTransactions = new List<Transaction>();
+            loggedIn = new Customer("", "", "", "", "", "", "");
         }
 
         /// <summary>

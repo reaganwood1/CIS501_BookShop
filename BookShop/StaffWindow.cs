@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace edu.ksu.cis.masaaki
 {
@@ -62,13 +64,34 @@ namespace edu.ksu.cis.masaaki
                 try
                 { // to capture an exception from SelectedIndex/SelectedItem of listCustomersDialog
                     listCustomersDialog.ClearDisplayItems();
-                    listCustomersDialog.AddDisplayItems(null); // null is a dummy argument
+                    List<Customer> customers = bookShop.GetAllCustomers();
+                    listCustomersDialog.AddDisplayItems(customers.ToArray()); // null is a dummy argument
                     if (listCustomersDialog.Display() == DialogReturn.Done) return;
                     // select button is pressed
-                   
-
-                    if (customerDialog.Display() == DialogReturn.Cancel) continue;
-                    // XXX Edit Done button is pressed
+                    Customer customer = null;
+                    foreach (Customer c in customers)
+                    {
+                        if ((listCustomersDialog.SelectedItem.ToString().Equals(c.ToString()))) // search for the right customer
+                        {
+                            customer = c;
+                            break;
+                        }
+                    }
+                    if (customer != null) // a customer was located
+                    {
+                        customerDialog.FirstName = customer.FirstName;
+                        customerDialog.LastName = customer.LastName;
+                        customerDialog.UserName = customer.UserName;
+                        customerDialog.Password = customer.Password;
+                        customerDialog.Address = customer.Address;
+                        customerDialog.EMailAddress = customer.EmailAddress;
+                        customerDialog.TelephoneNumber = customer.TelephoneNumber;
+                        if (customerDialog.Display() == DialogReturn.Cancel) continue;
+                        bookShop.EditUserInformation(customerDialog.FirstName, customerDialog.LastName, customerDialog.UserName, customerDialog.Password, customerDialog.EMailAddress, customerDialog.Address, customerDialog.TelephoneNumber);
+                    }
+                    else {
+                        MessageBox.Show("Customer not selected");
+                    }
                     
                 }
                 catch (BookShopException bsex)
@@ -122,6 +145,15 @@ namespace edu.ksu.cis.masaaki
 
                             try
                             { // to capture an exception from Price/Stock of bookDialog
+                                Book book = (Book)listBooksDialog.SelectedItem;
+                                bookDialog.ClearDisplayItems();
+                                bookDialog.Author = book.Author;
+                                bookDialog.BookTitle = book.Title;
+                                bookDialog.Publisher = book.Publisher;
+                                bookDialog.Date = book.PublishDate;
+                                bookDialog.Stock = book.Quantity;
+                                bookDialog.ISBN = book.Isbn;
+                                bookDialog.Price = book.Price;
                                 if (bookDialog.Display() == DialogReturn.Cancel) break;
 
                                 bookShop.EditBookInformation(bookDialog.BookTitle, bookDialog.Author, bookDialog.Publisher, bookDialog.Price, bookDialog.Stock, bookDialog.ISBN, bookDialog.Date, (Book)listBooksDialog.SelectedItem);
@@ -275,7 +307,14 @@ namespace edu.ksu.cis.masaaki
                 saveFileDialog.AddExtension = true;
                 saveFileDialog.InitialDirectory = Application.StartupPath;
                 if (saveFileDialog.ShowDialog() != DialogResult.OK) return;
-                // XXX
+                BinaryFormatter fo = new BinaryFormatter();
+
+                using (FileStream f = new FileStream(saveFileDialog.FileName,
+                         FileMode.Create,
+                         FileAccess.Write, FileShare.None)) {
+                    Tuple<int, BookShopController> t = new Tuple<int, BookShopController>(1, bookShop);
+                    fo.Serialize(f, t);
+                }
             }
             catch (Exception)
             {
@@ -292,7 +331,20 @@ namespace edu.ksu.cis.masaaki
                 openFileDialog.Filter = "VRS Files|*.vrs";
                 openFileDialog.InitialDirectory = Application.StartupPath;
                 if (openFileDialog.ShowDialog() != DialogResult.OK) return;
-                // XXX
+                
+                BinaryFormatter fo = new BinaryFormatter();
+                using (FileStream f = new FileStream(openFileDialog.FileName,
+                          FileMode.OpenOrCreate,
+                          FileAccess.Read)) {
+                    Tuple<int, BookShopController> t = (Tuple<int, BookShopController>)fo.Deserialize(f);
+                    List<Transaction> pending;
+                    t.Item2.GetAllPendingTransactions(out pending);
+                    List<Transaction> complete;
+                    t.Item2.GetAllCompleteTransactions(out complete);
+                    bookShop.SetNewVariableReferences(t.Item2.GetAllCustomers(), t.Item2.GetAllBooks(), pending, complete); // set the new reference variables.  
+                }
+                
+                //new FileStream(Application.UserAppDataPath + "\\data.stn", FileMode.OpenOrCreate, FileAccess.Read
             }
  
             catch (Exception)

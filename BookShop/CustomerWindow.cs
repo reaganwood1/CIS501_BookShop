@@ -69,7 +69,7 @@ namespace edu.ksu.cis.masaaki
                 // XXX Login Button is pressed
 
                 if (bookShop.Login(loginDialog.UserName, loginDialog.Password)) {
-                    MessageBox.Show("Login Successful");
+                    MessageBox.Show("Login Succeeded");
                 } else
                     throw new BookShopException("Login Failed"); 
             }
