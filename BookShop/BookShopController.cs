@@ -332,6 +332,7 @@ namespace edu.ksu.cis.masaaki
 
         public void DeleteTransaction(Transaction trans) {
             trans.RemoveTransactions();
+            completeTransactions.Remove(trans); // remove the transaction
         }
 
         /// <summary>

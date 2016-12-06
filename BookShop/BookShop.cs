@@ -128,7 +128,6 @@ namespace edu.ksu.cis.masaaki
                                     MessageBox.Show(this, "Unknown Operation : " + words[0]);
                                     break;
                             }
-                            bookShop.Logout(); // logout to simulate a fresh start to the program
                         }
                         catch (BookShopException ex)
                         {
@@ -136,7 +135,7 @@ namespace edu.ksu.cis.masaaki
                         }
                     }
                 }
-                
+                bookShop.Logout(); // logout to simulate a fresh start to the program
             }
         }
 

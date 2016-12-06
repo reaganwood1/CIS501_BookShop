@@ -210,22 +210,39 @@ namespace edu.ksu.cis.masaaki
                 try
                 { // to capture an exception from SelectedItem/SelectedIndex of listCompleteTransactionsDialog
                     listCompleteTransactionsDialog.ClearDisplayItems();
-                    listCompleteTransactionsDialog.AddDisplayItems(null); // XXX null is a dummy argument
-                    if (listCompleteTransactionsDialog.Display() == DialogReturn.Done) return;
-                    // select button is pressed
-                    
-                    showCompleteTransactionDialog.ClearDisplayItems();
-                    showCompleteTransactionDialog.AddDisplayItems(null); // XXX null is a dummy argument
-                    switch (showCompleteTransactionDialog.Display())
-                    {
-                        case DialogReturn.Remove: // transaction Remove
-                            // XXX
+                    List<Transaction> trans;
+                    if (bookShop.GetAllCompleteTransactions(out trans)) { // transactions are present
+                        listCompleteTransactionsDialog.AddDisplayItems(trans.ToArray()); // display all of the complete transactions
+                        if (listCompleteTransactionsDialog.Display() == DialogReturn.Done) return;
+                        // select button is pressed
+                        Transaction transFound = null;
+                        foreach (Transaction c in trans) {
+                            if ((listCompleteTransactionsDialog.SelectedItem.ToString().Equals(c.ToString()))) {
+                                transFound = c;
+                                break;
+                            }   
+                        }
+                        if (transFound != null)
+                        {
+                            showCompleteTransactionDialog.AddDisplayItems(transFound);
+                            switch (showCompleteTransactionDialog.Display())
+                            {
+                                case DialogReturn.Remove: // transaction Remove
+                                    bookShop.DeleteTransaction(transFound);
 
-                            continue;
-                        case DialogReturn.Done:
-                            continue;
+                                    continue;
+                                case DialogReturn.Done:
+                                    continue;
+                            }
+                        }
+                        else {
+                            MessageBox.Show("A line was selected");
+                        }
+                        
+                    } else {
+                        MessageBox.Show("No Complete Transactions");
+                        return;
                     }
-
                 }
                 catch(BookShopException bsex)
                 {
