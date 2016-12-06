@@ -97,37 +97,38 @@ namespace edu.ksu.cis.masaaki
                                     decimal price = getDecimal(words[5]);
                                     int stock = getInt(words[7]);
                                     // XXX use words[1]~words[4], price, words[6], and stock to register a book
-
+                                    bookShop.AddBook(words[1], words[2], words[3], words[4], words[6], Convert.ToDecimal(words[5]), Convert.ToInt32(words[7]));
                                     break;
                                 case "AddCustomer":
                                     // XXX use words[1]~words[7] to register a customer
-
+                                    bookShop.AddCustomer(words[2], words[1], words[3], words[4], words[5], words[6], words[7]);
                                     break;
                                 case "Login":
                                     // XXX use words[1] and words[2] to login a customer
-
+                                    bookShop.Login(words[1], words[2]);
                                     break;
                                 case "AddBookToWishList":
                                     // XXX use words[1] (ISBN) to register the book in the current customer's wishlist
-
+                                    bookShop.AddBookToWishlist(words[1], null); // second parameter is a case for when there is a book to help speed up the search
                                     break;
                                 case "AddBookToCart":
                                     // XXX use words[1] (ISBN) to add the book in the current customer's cart
-
+                                    bookShop.AddBookToCart(words[1], null); // second parameter is a case for when there is a book to help speed up the search
                                     break;
                                 case "CheckOut":
                                     // XXX check out the current customer's cart
-
+                                    bookShop.CheckOut();
                                     break;
                                 case "ProcessPendingTransaction":
                                     // XXX use words[1] (index of the pending transactions) to identify the pending
                                     // transaction to approve
-
+                                    bookShop.ProcessPendingTransactionByIndex(Convert.ToInt32(words[1]));
                                     break;
                                 default:
                                     MessageBox.Show(this, "Unknown Operation : " + words[0]);
                                     break;
                             }
+                            bookShop.Logout(); // logout to simulate a fresh start to the program
                         }
                         catch (BookShopException ex)
                         {

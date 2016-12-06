@@ -356,5 +356,11 @@ namespace edu.ksu.cis.masaaki
             else
                 return false; // book was not found, and therefore, not deleted from the wishlist
         }
+
+        public void ProcessPendingTransactionByIndex(int index) {
+            Transaction trans = pendingTransactions[index];
+            completeTransactions.Add(trans);
+            pendingTransactions.Remove(trans);
+        }
     }
 }
