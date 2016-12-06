@@ -142,13 +142,14 @@ namespace edu.ksu.cis.masaaki
         /// <param name="isbn">isbn to be edited</param>
         /// <param name="publishDate">publish date to be edited</param>
         /// <param name="price">price to be edited</param>
-        public void EditBook(string title, string author, string publisher, string isbn, string publishDate, decimal price) {
+        public void EditBook(string title, string author, string publisher, string isbn, string publishDate, decimal price, int quantity) {
             this.title = title;
             this.author = author;
             this.publisher = publisher;
             this.isbn = isbn;
             this.publishDate = publishDate;
             this.price = price;
+            this.quantity = quantity;
         }
 
         /// <summary>

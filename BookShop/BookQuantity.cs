@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace edu.ksu.cis.masaaki
 {
+    /// <summary>
+    /// BookQuantity class holds information pertaining to how much of a certain book will be ordered
+    /// </summary>
     [Serializable]
     public class BookQuantity
     {
@@ -14,7 +17,9 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         private int quantity;
 
-
+        /// <summary>
+        /// public getter for quantity
+        /// </summary>
         public int Quantity {
             get {
                 return quantity;
@@ -85,7 +90,7 @@ namespace edu.ksu.cis.masaaki
         /// </summary>
         /// <returns>false or true based on the availability of the Book</returns>
         public bool IncremenentQuantity() {
-            if (book.DecrementIfAvailable())
+            if (book.DecrementIfAvailable()) // is there a Book to take?
             {
                 quantity++;
                 return true;
@@ -94,17 +99,9 @@ namespace edu.ksu.cis.masaaki
         }
 
         /// <summary>
-        /// If the books are equal, return true
+        /// default for displaying basic book information pertaining to how many are currently being ordered
         /// </summary>
-        /// <param name="b1"></param>
         /// <returns></returns>
-        public bool BookMatches(Book b1) {
-            if (book == b1)
-                return true;
-            else
-                return false;
-        }
-
         public override string ToString()
         {
             return book.GetTitleAndAuthor() + ": " + quantity + "\t$" + price;
