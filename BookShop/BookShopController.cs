@@ -230,7 +230,24 @@ namespace edu.ksu.cis.masaaki
         /// <param name="address"></param>
         /// <param name="number"></param>
         public void EditUserInformation(string firstName, string lastName, string userName, string password, string email, string address, string number) {
+            if (LoggedIn()) { // only allow access to editing the user if the user is loggedIn
                 loggedIn.EditCustomerInformation(firstName, lastName, userName, password, email, number, address);
+            } 
+        }
+
+        /// <summary>
+        /// Edits user information for users that are not logged in
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <param name="email"></param>
+        /// <param name="address"></param>
+        /// <param name="number"></param>
+        /// <param name="c1"></param>
+        public void EditUserInformationForUsersNotLoggedIn(string firstName, string lastName, string userName, string password, string email, string address, string number, Customer c1) {
+            c1.EditCustomerInformation(firstName, lastName, userName, password, email, number, address);
         }
 
         /// <summary>

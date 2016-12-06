@@ -79,7 +79,7 @@ namespace edu.ksu.cis.masaaki
                     }
                     if (customer != null) // a customer was located
                     {
-                        customerDialog.FirstName = customer.FirstName;
+                        customerDialog.FirstName = customer.FirstName; // set values for customer to begin editing
                         customerDialog.LastName = customer.LastName;
                         customerDialog.UserName = customer.UserName;
                         customerDialog.Password = customer.Password;
@@ -87,7 +87,7 @@ namespace edu.ksu.cis.masaaki
                         customerDialog.EMailAddress = customer.EmailAddress;
                         customerDialog.TelephoneNumber = customer.TelephoneNumber;
                         if (customerDialog.Display() == DialogReturn.Cancel) continue;
-                        bookShop.EditUserInformation(customerDialog.FirstName, customerDialog.LastName, customerDialog.UserName, customerDialog.Password, customerDialog.EMailAddress, customerDialog.Address, customerDialog.TelephoneNumber);
+                        bookShop.EditUserInformationForUsersNotLoggedIn(customerDialog.FirstName, customerDialog.LastName, customerDialog.UserName, customerDialog.Password, customerDialog.EMailAddress, customerDialog.Address, customerDialog.TelephoneNumber, customer);
                     }
                     else {
                         MessageBox.Show("Customer not selected");
