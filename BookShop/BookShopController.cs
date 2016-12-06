@@ -236,6 +236,17 @@ namespace edu.ksu.cis.masaaki
         }
 
         /// <summary>
+        /// Returns a copy of the loggin user, not the actual because it's important that a reference to the actual does not get modified except through a method call to the BookShopController
+        /// </summary>
+        /// <returns>either a copy of the loggedIn user or null depending on whether a user is logged in</returns>
+        public Customer GetLoggedInUserInformation()
+        {
+            if (LoggedIn())
+                return new Customer(loggedIn.FirstName, loggedIn.LastName, loggedIn.UserName, loggedIn.Password, loggedIn.EmailAddress, loggedIn.TelephoneNumber, loggedIn.Address);
+            else
+                return null;
+        }
+        /// <summary>
         /// Edits user information for users that are not logged in
         /// </summary>
         /// <param name="firstName"></param>

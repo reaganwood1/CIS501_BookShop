@@ -102,8 +102,18 @@ namespace edu.ksu.cis.masaaki
         private void bnEditSelfInfo_Click(object sender, EventArgs e)
         {
             // XXX Edit Self Info button event handler
-            if (!bookShop.LoggedIn())
-                throw new BookShopException("This operation requires login");
+            if (!bookShop.LoggedIn()) {
+                MessageBox.Show("This operation requires login");
+                return;
+            }
+            Customer c = bookShop.GetLoggedInUserInformation();
+            customerDialog.FirstName = c.FirstName; // set initial conditions for display and editing purposes
+            customerDialog.LastName = c.LastName;
+            customerDialog.UserName = c.UserName;
+            customerDialog.Password = c.Password;
+            customerDialog.Address = c.Address;
+            customerDialog.EMailAddress = c.EmailAddress;
+            customerDialog.TelephoneNumber = c.TelephoneNumber;
             if (customerDialog.Display() == DialogReturn.Cancel) return;
             // XXX Done button is pressed
             // edit the customer information
@@ -349,7 +359,7 @@ namespace edu.ksu.cis.masaaki
         {
             // XXX Logout  button event handler
             if (!bookShop.Logout())
-                MessageBox.Show("Nobody is logged in");
+                MessageBox.Show("Another user is Logged In");
          
         }
     }
