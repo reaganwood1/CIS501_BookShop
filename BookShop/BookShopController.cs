@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+NOTE: BookShopController, Book, Transaction, BookQuantity, and Customer are all the sole property of Reagan Wood 
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
