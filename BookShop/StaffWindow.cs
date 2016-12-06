@@ -268,6 +268,7 @@ namespace edu.ksu.cis.masaaki
                         }
                         if (transFound != null)
                         { // Transaction found
+                            showCompleteTransactionDialog.ClearDisplayItems();
                             showCompleteTransactionDialog.AddDisplayItems(transFound);
                             switch (showCompleteTransactionDialog.Display())
                             {

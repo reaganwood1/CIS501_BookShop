@@ -208,7 +208,13 @@ namespace edu.ksu.cis.masaaki
                             if (wishListDialog.Display() == DialogReturn.Done) return;
                             // select is pressed
                             //XXX 
-                            Book selected = (Book)wishListDialog.SelectedItem;
+                            Book selected = null;
+                            foreach (Book b in books) {  // search for the book that was selected
+                                if (b.GetTitleAndAuthor().Equals((string)wishListDialog.SelectedItem)) {
+                                    selected = b;
+                                    break;
+                                }
+                            }
                             bookInWishListDialog.BookTitle = selected.Title; // add all of the fields to the dialog
                             bookInWishListDialog.Author = selected.Author;
                             bookInWishListDialog.Publisher = selected.Publisher;
